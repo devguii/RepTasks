@@ -22,7 +22,11 @@ public class UserDAO extends Database {
                     + "name VARCHAR(255) NOT NULL,"
                     + "username VARCHAR(255) NOT NULL UNIQUE,"
                     + "password VARCHAR(255) NOT NULL,"
-                    + "republic_id INT NULL);";
+                    + "republic_id INT NULL,"
+                    + "FOREIGN KEY (republic_id) REFERENCES Republic(id),"
+                    + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
+                    + "updated_at TIMESTAMP NULL"
+                    + ");";
             this.createTable(query);
         }
     }
