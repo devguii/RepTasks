@@ -19,6 +19,7 @@ public class TaskModel {
     private int userId;
     private RepublicModel republic;
     private UserModel user;
+    private boolean isDone;
     private Date createdAt;
     private Date updatedAt;
     private Date expiresAt;
@@ -47,6 +48,10 @@ public class TaskModel {
     
     public void setUser(UserModel user) {
         this.user = user;
+    }
+    
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
     
     public void setCreatedAt(Date createdAt) {
@@ -83,6 +88,10 @@ public class TaskModel {
     
     public UserModel getUser() {
         return this.user;
+    }
+    
+    public boolean getIsDone() {
+        return this.isDone;
     }
     
     public Date getCreatedAt() {

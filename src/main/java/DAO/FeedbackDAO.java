@@ -15,7 +15,15 @@ public class FeedbackDAO extends Database {
         super();
         if (!this.tableExists("Feedbacks")) {
             String query = "CREATE TABLE Feedbacks("
+                    + "id SERIAL NOT NULL PRIMARY KEY,"
+                    + "comment TEXT NULL,"
+                    + "score DOUBLE NOT NULL,"
+                    + "user_id INT NOT NULL,"
+                    + "task_id INT NOT NULL,"
+                    + "FOREIGN KEY (user_id) REFERENCES Users(id)"
+                    + "FOREIGN KEY (task_id) REFERENCES Tasks(id)"
                     + ");";
+            this.createTable(query);
         }
     }
 }
