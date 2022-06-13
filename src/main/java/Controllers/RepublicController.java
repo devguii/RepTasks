@@ -17,9 +17,16 @@ public class RepublicController {
     private SignInController signInController;
     private UserModel user;
     
+    private ProfileController profileController;
+    private TasksController tasksController;
+    private ManagementController managementController;
+    
     public RepublicController(SignInController signInController) {
         this.signInController = signInController;
         this.republicView = new RepublicView(this);
+        this.profileController = new ProfileController(this);
+        this.tasksController = new TasksController(this);
+        this.managementController = new ManagementController(this);
     }
     
     public void view() {

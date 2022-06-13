@@ -4,10 +4,18 @@
  */
 package Controllers;
 
+import Views.Partials.AdministrationPanel;
+
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class ManagementController {
+    private RepublicController republicController;
+    private AdministrationPanel adminPanel;
     
+    public ManagementController(RepublicController republicController) {
+        this.republicController = republicController;
+        this.adminPanel = new AdministrationPanel(this);
+    }
 }

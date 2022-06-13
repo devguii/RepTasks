@@ -6,13 +6,14 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class RepublicModel {
-    private int id;
+    private UUID uuid;
     private String name;
     private UserModel userOwner;
     private ArrayList<TaskModel> tasks;
@@ -22,8 +23,12 @@ public class RepublicModel {
     
     public RepublicModel() { }
     
-    public void setId(int id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        try {
+            this.uuid = UUID.fromString(uuid);
+        } catch (Exception error) {
+            this.uuid = null;
+        }
     }
     
     public void setName(String name) {
@@ -50,8 +55,8 @@ public class RepublicModel {
         this.updatedAt = updatedAt;
     }
     
-    public int getId() {
-        return this.id;
+    public UUID getUuid() {
+        return this.uuid;
     }
     
     public String getName() {

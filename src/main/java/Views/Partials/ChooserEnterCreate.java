@@ -26,15 +26,15 @@ public class ChooserEnterCreate extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        createRepublicButton = new javax.swing.JButton();
+        enterRepublicButton = new javax.swing.JButton();
+        chooseLabel = new javax.swing.JLabel();
 
-        jButton1.setText("Criar República");
+        createRepublicButton.setText("Criar República");
 
-        jButton2.setText("Entrar em República");
+        enterRepublicButton.setText("Entrar em República");
 
-        jLabel1.setText("Escolha a opção:");
+        chooseLabel.setText("Escolha a opção:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -43,29 +43,29 @@ public class ChooserEnterCreate extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(chooseLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(createRepublicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(enterRepublicButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(196, 196, 196)
-                .addComponent(jLabel1)
+                .addComponent(chooseLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(createRepublicButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(enterRepublicButton)
                 .addContainerGap(196, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel chooseLabel;
+    private javax.swing.JButton createRepublicButton;
+    private javax.swing.JButton enterRepublicButton;
     // End of variables declaration//GEN-END:variables
 }

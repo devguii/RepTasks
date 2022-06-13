@@ -4,16 +4,20 @@
  */
 package Views.Partials;
 
+import Controllers.ProfileController;
+
 /**
  *
- * @author gabri
+ * @author Gabriel Barbosa Silva 2211114
  */
 public class MyProfilePanel extends javax.swing.JPanel {
-
+    private ProfileController profileController;
+    
     /**
      * Creates new form MyProfilePanel
      */
-    public MyProfilePanel() {
+    public MyProfilePanel(ProfileController profileController) {
+        this.profileController = profileController;
         initComponents();
     }
 

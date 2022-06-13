@@ -19,10 +19,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="chooseLabel" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton1" max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="203" max="-2" attributes="0"/>
+                      <Component id="createRepublicButton" max="32767" attributes="0"/>
+                      <Component id="enterRepublicButton" min="-2" pref="203" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="137" max="32767" attributes="0"/>
@@ -33,28 +33,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="chooseLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="createRepublicButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="enterRepublicButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="196" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="createRepublicButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Criar Rep&#xfa;blica"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="enterRepublicButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Entrar em Rep&#xfa;blica"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="chooseLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Escolha a op&#xe7;&#xe3;o:"/>
       </Properties>

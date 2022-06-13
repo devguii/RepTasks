@@ -6,8 +6,12 @@ package Controllers;
 
 /**
  *
- * @author gabri
+ * @author Gabriel Barbosa Silva 2211114
  */
 public class TasksController {
+    private RepublicController republicController;
     
+    public TasksController(RepublicController republicController) {
+        this.republicController = republicController;
+    }
 }

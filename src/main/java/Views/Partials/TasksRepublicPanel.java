@@ -4,16 +4,20 @@
  */
 package Views.Partials;
 
+import Controllers.TasksController;
+
 /**
  *
- * @author gabri
+ * @author Gabriel Barbosa Silva 2211114
  */
 public class TasksRepublicPanel extends javax.swing.JPanel {
+    private TasksController tasksController;
 
     /**
      * Creates new form TasksRepublicPanel
      */
-    public TasksRepublicPanel() {
+    public TasksRepublicPanel(TasksController tasksController) {
+        this.tasksController = tasksController;
         initComponents();
     }
 

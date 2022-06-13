@@ -6,6 +6,7 @@ package DAO;
 
 import Models.UserModel;
 import java.sql.SQLException;
+import java.util.UUID;
 import javax.swing.JOptionPane;
 import utils.Database;
 
@@ -43,15 +44,15 @@ public class UserDAO extends Database {
     public UserModel findById(int id) {
         UserModel userModel = new UserModel();
         try {
-            this.preparedStatement = this.connection.prepareStatement("SELECT * FROM Users WHERE id = ?");
+            this.preparedStatement = this.connection.prepareStatement("SELECT * FROM Users WHERE uuid = ?");
             this.preparedStatement.setInt(1, id);
             this.resultSet = this.preparedStatement.executeQuery();
             
             if (this.resultSet.next()) {
-                userModel.setId(this.resultSet.getInt("id"));
+                userModel.setUuid(this.resultSet.getString("uuid"));
                 userModel.setUsername(this.resultSet.getString("username"));
                 userModel.setPassword(this.resultSet.getString("password"));
-                userModel.setRepublicId(this.resultSet.getInt("republic_id"));
+                userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 userModel.setCreatedAt(this.resultSet.getTimestamp("created_at"));
                 userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at"));
             }
@@ -71,10 +72,10 @@ public class UserDAO extends Database {
             
             if (this.resultSet.next()) {
                 userModel = new UserModel();
-                userModel.setId(this.resultSet.getInt("id"));
+                userModel.setUuid(this.resultSet.getString("uuid"));
                 userModel.setUsername(this.resultSet.getString("username"));
                 userModel.setPassword(this.resultSet.getString("password"));
-                userModel.setRepublicId(this.resultSet.getInt("republic_id"));
+                userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 userModel.setCreatedAt(this.resultSet.getTimestamp("created_at"));
                 userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at"));
             }

@@ -6,8 +6,12 @@ package Controllers;
 
 /**
  *
- * @author gabri
+ * @author Gabriel Barbosa Silva 2211114
  */
 public class ProfileController {
+    private RepublicController republicController;
     
+    public ProfileController(RepublicController republicController) {
+        this.republicController = republicController;
+    }
 }

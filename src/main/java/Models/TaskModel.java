@@ -6,17 +6,18 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class TaskModel {
-    private int id;
+    private UUID uuid;
     private String title;
     private String description;
-    private int republicId;
-    private int userId;
+    private UUID republicUuid;
+    private UUID userUuid;
     private RepublicModel republic;
     private UserModel user;
     private boolean isDone;
@@ -26,8 +27,12 @@ public class TaskModel {
     
     public TaskModel() { }
     
-    public void setId(int id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        try {
+            this.uuid = UUID.fromString(uuid);
+        } catch (Exception error) {
+            this.uuid = null;
+        }
     }
     
     public void setTitle(String title) {
@@ -38,8 +43,12 @@ public class TaskModel {
         this.description = description;
     }
         
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserUuid(String userUuid) {
+        try {
+            this.userUuid = UUID.fromString(userUuid);
+        } catch (Exception error) {
+            this.userUuid = null;
+        }
     }
     
     public void setRepublic(RepublicModel republic) {
@@ -66,8 +75,8 @@ public class TaskModel {
         this.expiresAt = expiresAt;
     }
     
-    public int getId() {
-        return this.id;
+    public UUID getUuid() {
+        return this.uuid;
     }
     
     public String getTitle() {
@@ -78,8 +87,8 @@ public class TaskModel {
         return this.description;
     }
     
-    public int getUserId() {
-        return this.userId;
+    public UUID getUserUuid() {
+        return this.userUuid;
     }
     
     public RepublicModel getRepublic() {

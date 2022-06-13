@@ -22,10 +22,6 @@ import javax.swing.JPanel;
 public class RepublicView extends javax.swing.JFrame {
     private UserModel user;
     private RepublicController republicController;
-    private ChooserEnterCreate chooserEnterCreate;
-    private ProfileController profileController;
-    private TasksController tasksController;
-    private ManagementController managementController;
     
     public void setUser(UserModel user) {
         this.user = user;
@@ -59,17 +55,12 @@ public class RepublicView extends javax.swing.JFrame {
     }
     
     public void viewContentPanel() {
-        if (this.user.getRepublicId() > 0) {
+        if (this.user.getRepublicUuid() != null) {
             System.out.println("Republic Id is not null");
         } else {
             ChooserEnterCreate chooser = new ChooserEnterCreate();
             chooser.setVisible(true);
             this.switchPanel(chooser);
-            
-            AdministrationPanel admin = new AdministrationPanel();
-            chooser.setVisible(true);
-            this.switchPanel(admin);
-            
             this.menuPanel1.setChooserEnterCreateMenu();
         }
     }

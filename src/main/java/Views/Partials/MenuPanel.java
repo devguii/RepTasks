@@ -15,7 +15,6 @@ public class MenuPanel extends javax.swing.JPanel {
     private RepublicView republicView;
     private UserModel user;
     
-    
     public void setRepublicView(RepublicView republicView) {
         this.republicView = republicView;
     }
