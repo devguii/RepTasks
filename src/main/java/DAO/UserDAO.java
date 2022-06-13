@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import gabriel.raptasks.Models.UserModel;
+import Models.UserModel;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import utils.Database;
