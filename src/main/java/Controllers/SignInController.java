@@ -49,7 +49,7 @@ public class SignInController {
         userModel.setUsername(username);
         userModel.setPassword(password);
         
-        
+        System.out.println(password);
         
         return true;
     }

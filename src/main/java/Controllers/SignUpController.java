@@ -58,7 +58,8 @@ public class SignUpController {
         user.setPassword(passwordHash.getResult());
         
         if (this.userDAO.create(user)) {
-            JOptionPane.showMessageDialog(null, "Conta criada com sucesso!", "Cadastro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Conta criada com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            this.toSignIn();
         } else {
             JOptionPane.showMessageDialog(null, "Não foi possível criar a conta!", "Cadastro", JOptionPane.ERROR_MESSAGE);
         }

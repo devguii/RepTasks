@@ -21,7 +21,7 @@ public class UserDAO extends Database {
     public boolean create(UserModel user) {
         boolean isCreated = false;
         try {
-            this.preparedStatement = this.connection.prepareStatement("INSERT INTO Users(id, username, password) VALUES (NULL, ?, ?)");
+            this.preparedStatement = this.connection.prepareStatement("INSERT INTO Users(username, password) VALUES (?, ?)");
             this.preparedStatement.setString(1, user.getUsername());
             this.preparedStatement.setString(2, user.getPassword());
             int response = this.preparedStatement.executeUpdate();

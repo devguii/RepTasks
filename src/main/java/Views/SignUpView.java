@@ -122,8 +122,8 @@ public class SignUpView extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         String username = this.usernameField.getText();
-        String password = this.passwordField.getPassword().toString();
-        String confirmPassword = this.passwordConfirmField.getPassword().toString();
+        String password = new String(this.passwordField.getPassword());
+        String confirmPassword = new String(this.passwordConfirmField.getPassword());
         this.signUpController.register(username, password, confirmPassword);
     }//GEN-LAST:event_registerButtonActionPerformed
 
