@@ -7,6 +7,9 @@ package Controllers;
 import DAO.UserDAO;
 import Models.UserModel;
 import Views.SignInView;
+import com.password4j.Hash;
+import com.password4j.Password;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +27,7 @@ public class SignInController {
         this.signInView = new SignInView(this);
         this.signUpController = new SignUpController(this);
         this.republicController = new RepublicController(this);
+        this.userDAO = new UserDAO();
     }
     
     public void view() {
@@ -44,13 +48,19 @@ public class SignInController {
         this.republicController.view();
     }
     
-    public boolean login(String username, String password) {
-        UserModel userModel = new UserModel();
-        userModel.setUsername(username);
-        userModel.setPassword(password);
+    public void login(String username, String password) {
+        UserModel user = this.userDAO.findByUsername(username);
         
-        System.out.println(password);
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "Não foi possível efetuar o login!", "Login", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
-        return true;
+        if (!Password.check(password, user.getPassword()).withArgon2()) {
+            JOptionPane.showMessageDialog(null, "Senha inválida!", "Login", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
     }
 }

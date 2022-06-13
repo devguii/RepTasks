@@ -42,8 +42,8 @@ public class SignUpController {
     public void register(String username, String password, String confirmPassword) {
         UserModel user = this.userDAO.findByUsername(username);
         
-        if (confirmPassword.equals(password)) {
-            JOptionPane.showMessageDialog(null, "Confirmar senha não coincide com a senha", "Cadastro", JOptionPane.ERROR_MESSAGE);
+        if (!confirmPassword.equals(password)) {
+            JOptionPane.showMessageDialog(null, "Senha de confirmação não coincide com a senha", "Cadastro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         

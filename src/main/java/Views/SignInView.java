@@ -119,8 +119,8 @@ public class SignInView extends javax.swing.JFrame {
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String username = this.usernameField.getText();
-        String password = new String(this.passwordField.getPassword());
+        String username = this.usernameField.getText().trim();
+        String password = new String(this.passwordField.getPassword()).trim();
         this.signInController.login(username, password);
     }//GEN-LAST:event_loginButtonActionPerformed
 
