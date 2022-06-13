@@ -40,7 +40,7 @@ public class Migration extends Database {
                 + "description VARCHAR(255) NOT NULL, "
                 + "republic_id INT NOT NULL, "
                 + "user_id INT NOT NULL, "
-                + "is_done TINYINT(1) NOT NULL, "
+                + "is_done SMALLINT NOT NULL DEFAULT 0, "
                 + "FOREIGN KEY (republic_id) REFERENCES Republic(id), "
                 + "FOREIGN KEY (user_id) REFERENCES Users(id), "
                 + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
@@ -66,19 +66,10 @@ public class Migration extends Database {
     
     public void run() {
         boolean hasError = false;
-        for (String query : this.migration) {
+        for (String migrate : this.migration) {
             try {
-                this.preparedStatement = this.connection.prepareStatement(query);
-                boolean response = this.preparedStatement.execute();
-                
-                System.out.println(response);
-                
-                if (response) {
-                    this.connection.commit();
-                } else {
-                    hasError = true;
-                    this.connection.rollback();
-                }
+                this.connection.createStatement().execute(migrate);
+                this.connection.commit();
             } catch (SQLException error) {
                 hasError = true;
                 System.out.println(error.getMessage());
