@@ -4,8 +4,12 @@
  */
 package Views;
 
+import Controllers.ManagementController;
+import Controllers.ProfileController;
 import Controllers.RepublicController;
+import Controllers.TasksController;
 import Models.UserModel;
+import Views.Partials.AdministrationPanel;
 import Views.Partials.ChooserEnterCreate;
 import Views.Partials.MenuPanel;
 import javax.swing.GroupLayout;
@@ -18,6 +22,10 @@ import javax.swing.JPanel;
 public class RepublicView extends javax.swing.JFrame {
     private UserModel user;
     private RepublicController republicController;
+    private ChooserEnterCreate chooserEnterCreate;
+    private ProfileController profileController;
+    private TasksController tasksController;
+    private ManagementController managementController;
     
     public void setUser(UserModel user) {
         this.user = user;
@@ -28,15 +36,40 @@ public class RepublicView extends javax.swing.JFrame {
         return this.user;
     }
     
+    public void switchPanel(JPanel panel) {
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGap(221)
+                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        
+        this.repaint();
+    }
+    
     public void viewContentPanel() {
         if (this.user.getRepublicId() > 0) {
             System.out.println("Republic Id is not null");
         } else {
             ChooserEnterCreate chooser = new ChooserEnterCreate();
             chooser.setVisible(true);
-            this.contentPanel.add(chooser);
-            this.contentPanel.repaint();
-            this.contentPanel.revalidate();
+            this.switchPanel(chooser);
+            
+            AdministrationPanel admin = new AdministrationPanel();
+            chooser.setVisible(true);
+            this.switchPanel(admin);
+            
             this.menuPanel1.setChooserEnterCreateMenu();
         }
     }
@@ -61,15 +94,12 @@ public class RepublicView extends javax.swing.JFrame {
 
         separator = new javax.swing.JSeparator();
         menuPanel1 = new Views.Partials.MenuPanel();
-        contentPanel = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RepTasks");
         setResizable(false);
 
         separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        contentPanel.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,9 +110,7 @@ public class RepublicView extends javax.swing.JFrame {
                 .addComponent(menuPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(488, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,8 +118,7 @@ public class RepublicView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menuPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(separator, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(contentPanel))
+                    .addComponent(separator, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -103,7 +130,6 @@ public class RepublicView extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane contentPanel;
     private Views.Partials.MenuPanel menuPanel1;
     private javax.swing.JSeparator separator;
     // End of variables declaration//GEN-END:variables

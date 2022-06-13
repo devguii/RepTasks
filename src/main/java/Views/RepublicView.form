@@ -30,9 +30,7 @@
               <Component id="menuPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="separator" min="-2" pref="3" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="contentPanel" pref="476" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="488" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,7 +41,6 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="menuPanel1" alignment="1" max="32767" attributes="0"/>
                   <Component id="separator" alignment="1" max="32767" attributes="0"/>
-                  <Component id="contentPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -58,12 +55,5 @@
     </Component>
     <Component class="Views.Partials.MenuPanel" name="menuPanel1">
     </Component>
-    <Container class="javax.swing.JTabbedPane" name="contentPanel">
-      <Properties>
-        <Property name="tabLayoutPolicy" type="int" value="1"/>
-      </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
-    </Container>
   </SubComponents>
 </Form>
