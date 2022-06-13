@@ -16,7 +16,7 @@ public class RepublicDAO extends Database {
         if (!this.tableExists("Republic")) {
             String query = "CREATE TABLE Republic("
                     + "id SERIAL NOT NULL PRIMARY KEY,"
-                    + "name VARCHAR(255) NOT NULL UNIQUE,"
+                    + "name VARCHAR(255) NOT NULL,"
                     + "user_id INT NOT NULL,"
                     + "FOREIGN KEY (user_id) REFERENCES Users(id),"
                     + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"

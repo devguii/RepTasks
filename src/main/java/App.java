@@ -3,11 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-import DAO.FeedbackDAO;
-import DAO.RepublicDAO;
-import DAO.TaskDAO;
-import DAO.UserDAO;
 import Controllers.SignInController;
+import utils.Migration;
 
 
 /**
@@ -16,10 +13,8 @@ import Controllers.SignInController;
  */
 public class App {
     public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        TaskDAO taskDAO = new TaskDAO();
-        RepublicDAO republicDAO = new RepublicDAO();
-        FeedbackDAO feedbackDAO = new FeedbackDAO();
+        Migration migration = new Migration();
+        migration.run();
         
         SignInController republic = new SignInController();
         republic.view();
