@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import gabriel.raptasks.Models.UserModel;
+import Models.UserModel;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import utils.Database;
@@ -16,19 +16,6 @@ import utils.Database;
 public class UserDAO extends Database {
     public UserDAO() {
         super();
-        if (!this.tableExists("Users")) {
-            String query = "CREATE TABLE users("
-                    + "id SERIAL NOT NULL PRIMARY KEY,"
-                    + "name VARCHAR(255) NOT NULL,"
-                    + "username VARCHAR(255) NOT NULL UNIQUE,"
-                    + "password VARCHAR(255) NOT NULL,"
-                    + "republic_id INT NULL,"
-                    + "FOREIGN KEY (republic_id) REFERENCES Republic(id),"
-                    + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
-                    + "updated_at TIMESTAMP NULL"
-                    + ");";
-            this.createTable(query);
-        }
     }
     
     public UserModel findById(int id) {

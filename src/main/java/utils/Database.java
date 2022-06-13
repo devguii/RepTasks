@@ -24,7 +24,7 @@ public class Database {
     protected DatabaseMetaData metaData = null;
 
     protected static final String path = System.getProperty("user.dir");
-    protected static final File configFile = new File(path + "/src/main/java/Database/config.properties");
+    protected static final File configFile = new File(path + "/src/main/java/utils/config.properties");
 
     public Database() {
         try {
