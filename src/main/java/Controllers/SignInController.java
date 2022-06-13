@@ -61,6 +61,7 @@ public class SignInController {
             return;
         }
         
-        
+        this.close();
+        this.republicController.view();
     }
 }
