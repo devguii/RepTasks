@@ -37,7 +37,7 @@ public class RepublicView extends javax.swing.JFrame {
             this.contentPanel.add(chooser);
             this.contentPanel.repaint();
             this.contentPanel.revalidate();
-            this.menuPanel1.setChooserEnterCreate();
+            this.menuPanel1.setChooserEnterCreateMenu();
         }
     }
     

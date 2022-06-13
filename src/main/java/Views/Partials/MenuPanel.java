@@ -34,7 +34,7 @@ public class MenuPanel extends javax.swing.JPanel {
         this.scoreLabel.setText("Seu Score: " + 0);
     }
     
-    public void setChooserEnterCreate() {
+    public void setChooserEnterCreateMenu() {
         this.adminButton.setVisible(false);
         this.myTasksButton.setVisible(false);
         this.tasksRepButton.setVisible(false);
