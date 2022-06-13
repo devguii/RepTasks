@@ -6,6 +6,7 @@ Views\Partials\MyProfilePanel.class
 Views\SignUpView.class
 DAO\TaskDAO.class
 Models\RepublicModel.class
+Views\SignUpView$2.class
 DAO\UserDAO.class
 utils\Database.class
 DAO\FeedbackDAO.class
@@ -16,6 +17,7 @@ Views\RepublicView.class
 Models\FeedbackModel.class
 Controllers\SignUpController.class
 Views\Partials\TasksRepublicPanel.class
+utils\Migration.class
 Views\Partials\MenuPanel$1.class
 DAO\RepublicDAO.class
 Models\UserModel.class

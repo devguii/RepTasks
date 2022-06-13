@@ -32,7 +32,7 @@ public class Migration extends Database {
                 + "updated_at TIMESTAMP NULL"
                 + ");",
             "ALTER TABLE public.Users "
-                + "ADD COLUMN republic_id INT NULL, "
+                + "ADD COLUMN republic_id INT NULL DEFAULT NULL, "
                 + "ADD FOREIGN KEY (republic_id) REFERENCES Republic(id);",
             "CREATE TABLE IF NOT EXISTS public.Tasks("
                 + "id SERIAL NOT NULL PRIMARY KEY, "

@@ -24,19 +24,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="passwordLabel" max="32767" attributes="0"/>
-                  <Component id="usernameLabel" max="32767" attributes="0"/>
-                  <Component id="repTasksLabel" alignment="0" pref="293" max="32767" attributes="0"/>
-                  <Component id="passwordField" alignment="1" max="32767" attributes="0"/>
-                  <Component id="usernameField" alignment="1" max="32767" attributes="0"/>
-                  <Component id="passwordConfirmLabel" alignment="1" max="32767" attributes="0"/>
-                  <Component id="passwordConfirmField" alignment="1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -44,6 +31,19 @@
                   <Component id="loginButton" min="-2" pref="103" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="passwordConfirmField" max="32767" attributes="0"/>
+                  <Component id="passwordLabel" max="32767" attributes="0"/>
+                  <Component id="usernameLabel" max="32767" attributes="0"/>
+                  <Component id="repTasksLabel" alignment="0" pref="293" max="32767" attributes="0"/>
+                  <Component id="usernameField" alignment="1" max="32767" attributes="0"/>
+                  <Component id="passwordConfirmLabel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="passwordField" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,12 +85,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="usernameField">
     </Component>
-    <Component class="javax.swing.JTextField" name="passwordField">
-    </Component>
     <Component class="javax.swing.JButton" name="registerButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="loginButton">
       <Properties>
@@ -110,12 +111,14 @@
         <Property name="text" type="java.lang.String" value="Senha:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="passwordConfirmField">
-    </Component>
     <Component class="javax.swing.JLabel" name="passwordConfirmLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar senha:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passwordConfirmField">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passwordField">
     </Component>
   </SubComponents>
 </Form>

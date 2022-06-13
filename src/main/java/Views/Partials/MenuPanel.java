@@ -13,11 +13,15 @@ import Views.RepublicView;
 public class MenuPanel extends javax.swing.JPanel {
     private RepublicView republicView;
     
+    
+    public void setRepublicView(RepublicView republicView) {
+        this.republicView = republicView;
+    }
+    
     /**
      * Creates new form MenuPanel
      */
-    public MenuPanel(RepublicView republicView) {
-        this.republicView = republicView;
+    public MenuPanel() {
         initComponents();
     }
 
