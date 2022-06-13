@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import Controllers.RepublicController;
 import Controllers.SignInController;
+import Views.RepublicView;
 import utils.Migration;
 
 
@@ -15,6 +17,9 @@ public class App {
     public static void main(String[] args) {
         Migration migration = new Migration();
         migration.run();
+        
+        //RepublicView republicView = new RepublicView(new RepublicController(new SignInController()));
+        //republicView.setVisible(true);
         
         SignInController republic = new SignInController();
         republic.view();

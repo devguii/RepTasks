@@ -5,6 +5,7 @@
 package Controllers;
 
 import Models.UserModel;
+import Views.Partials.ChooserEnterCreate;
 import Views.RepublicView;
 
 /**
@@ -14,7 +15,7 @@ import Views.RepublicView;
 public class RepublicController {
     private RepublicView republicView;
     private SignInController signInController;
-    private int userId;
+    private UserModel user;
     
     public RepublicController(SignInController signInController) {
         this.signInController = signInController;
@@ -22,6 +23,7 @@ public class RepublicController {
     }
     
     public void view() {
+        this.republicView.viewContentPanel();
         this.republicView.setVisible(true);
     }
     
@@ -29,7 +31,12 @@ public class RepublicController {
         this.republicView.setVisible(false);
     }
     
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserModel user) {
+        this.user = user;
+        this.republicView.setUser(user);
+    }
+    
+    public UserModel getUser() {
+        return this.user;
     }
 }

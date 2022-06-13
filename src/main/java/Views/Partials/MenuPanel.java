@@ -4,6 +4,7 @@
  */
 package Views.Partials;
 
+import Models.UserModel;
 import Views.RepublicView;
 
 /**
@@ -12,12 +13,37 @@ import Views.RepublicView;
  */
 public class MenuPanel extends javax.swing.JPanel {
     private RepublicView republicView;
+    private UserModel user;
+    
+    
+    public void setRepublicView(RepublicView republicView) {
+        this.republicView = republicView;
+    }
+    
+    public void setUser(UserModel user) {
+        this.user = user;
+        this.setProfile();
+        this.setScore();
+    }
+    
+    public void setProfile() {
+        this.welcomeLabel.setText("Bem vindo, " + this.user.getUsername());
+    }
+    
+    public void setScore() {
+        this.scoreLabel.setText("Seu Score: " + 0);
+    }
+    
+    public void setChooserEnterCreate() {
+        this.adminButton.setVisible(false);
+        this.myTasksButton.setVisible(false);
+        this.tasksRepButton.setVisible(false);
+    }
     
     /**
      * Creates new form MenuPanel
      */
-    public MenuPanel(RepublicView republicView) {
-        this.republicView = republicView;
+    public MenuPanel() {
         initComponents();
     }
 

@@ -15,7 +15,6 @@ public class UserModel {
     private int id;
     private String username;
     private String password;
-    private String passwordHash;
     private int republicId;
     private RepublicModel republic;
     private ArrayList<TaskModel> tasks;
@@ -34,10 +33,6 @@ public class UserModel {
     
     public void setPassword(String password) {
         this.password = password;
-    }
-    
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
     
     public void setRepublicId(int republicId) {
@@ -70,10 +65,6 @@ public class UserModel {
     
     public String getPassword() {
         return this.password;
-    }
-    
-    public String getPasswordHash() {
-        return this.passwordHash;
     }
     
     public int getRepublicId() {
