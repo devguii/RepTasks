@@ -13,19 +13,5 @@ import utils.Database;
 public class FeedbackDAO extends Database {
     public FeedbackDAO() {
         super();
-        if (!this.tableExists("Feedbacks")) {
-            String query = "CREATE TABLE Feedbacks("
-                    + "id SERIAL NOT NULL PRIMARY KEY,"
-                    + "comment TEXT NULL,"
-                    + "score DOUBLE NOT NULL,"
-                    + "user_id INT NOT NULL,"
-                    + "task_id INT NOT NULL,"
-                    + "FOREIGN KEY (user_id) REFERENCES Users(id),"
-                    + "FOREIGN KEY (task_id) REFERENCES Tasks(id),"
-                    + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
-                    + "updated_at TIMESTAMP NULL"
-                    + ");";
-            this.createTable(query);
-        }
     }
 }

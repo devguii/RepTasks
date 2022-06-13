@@ -13,16 +13,5 @@ import utils.Database;
 public class RepublicDAO extends Database {
     public RepublicDAO() {
         super();
-        if (!this.tableExists("Republic")) {
-            String query = "CREATE TABLE Republic("
-                    + "id SERIAL NOT NULL PRIMARY KEY,"
-                    + "name VARCHAR(255) NOT NULL,"
-                    + "user_id INT NOT NULL,"
-                    + "FOREIGN KEY (user_id) REFERENCES Users(id),"
-                    + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
-                    + "updated_at TIMESTAMP NULL"
-                    + ");";
-            this.createTable(query);
-        }
     }
 }

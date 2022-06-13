@@ -72,12 +72,10 @@ public class Migration extends Database {
                 this.connection.commit();
             } catch (SQLException error) {
                 hasError = true;
-                System.out.println(error.getMessage());
+                //System.out.println(error.getMessage());
             }
         }
-        if (hasError) {
-            JOptionPane.showMessageDialog(null, "Houve algum problema ao efetuar a migração!", "Migração", JOptionPane.ERROR_MESSAGE);
-        } else {
+        if (!hasError) {
             JOptionPane.showMessageDialog(null, "Migração efetuada com sucesso!", "Migração", JOptionPane.INFORMATION_MESSAGE);
         }
     }
