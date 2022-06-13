@@ -39,6 +39,7 @@ public class SignInController {
     }
     
     public void toSignUp() {
+        this.signInView.emptyFields();
         this.close();
         this.signUpController.view();
     }
@@ -62,6 +63,8 @@ public class SignInController {
         }
         
         this.close();
+        this.republicController.setUser(user);
         this.republicController.view();
+        return;
     }
 }

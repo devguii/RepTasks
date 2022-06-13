@@ -5,14 +5,41 @@
 package Views;
 
 import Controllers.RepublicController;
+import Models.UserModel;
+import Views.Partials.ChooserEnterCreate;
 import Views.Partials.MenuPanel;
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class RepublicView extends javax.swing.JFrame {
+    private UserModel user;
     private RepublicController republicController;
+    
+    public void setUser(UserModel user) {
+        this.user = user;
+        this.menuPanel1.setUser(this.user);
+    }
+    
+    public UserModel getUser() {
+        return this.user;
+    }
+    
+    public void viewContentPanel() {
+        if (this.user.getRepublicId() > 0) {
+            System.out.println("Republic Id is not null");
+        } else {
+            ChooserEnterCreate chooser = new ChooserEnterCreate();
+            chooser.setVisible(true);
+            this.contentPanel.add(chooser);
+            this.contentPanel.repaint();
+            this.contentPanel.revalidate();
+            this.menuPanel1.setChooserEnterCreate();
+        }
+    }
     
     /**
      * Creates new form MuralView
@@ -34,12 +61,15 @@ public class RepublicView extends javax.swing.JFrame {
 
         separator = new javax.swing.JSeparator();
         menuPanel1 = new Views.Partials.MenuPanel();
+        contentPanel = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RepTasks");
         setResizable(false);
 
         separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        contentPanel.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -50,15 +80,18 @@ public class RepublicView extends javax.swing.JFrame {
                 .addComponent(menuPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(menuPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(menuPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(separator, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentPanel))
                 .addContainerGap())
         );
 
@@ -70,6 +103,7 @@ public class RepublicView extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane contentPanel;
     private Views.Partials.MenuPanel menuPanel1;
     private javax.swing.JSeparator separator;
     // End of variables declaration//GEN-END:variables

@@ -20,6 +20,12 @@ public class SignUpView extends javax.swing.JFrame {
         this.signUpController = signUpController;
         initComponents();
     }
+    
+    public void emptyFields() {
+        this.usernameField.setText("");
+        this.passwordField.setText("");
+        this.passwordConfirmField.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -51,6 +51,9 @@ public class UserDAO extends Database {
                 userModel.setId(this.resultSet.getInt("id"));
                 userModel.setUsername(this.resultSet.getString("username"));
                 userModel.setPassword(this.resultSet.getString("password"));
+                userModel.setRepublicId(this.resultSet.getInt("republic_id"));
+                userModel.setCreatedAt(this.resultSet.getTimestamp("created_at"));
+                userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at"));
             }
         } catch (SQLException error) {
             JOptionPane.showMessageDialog(null, "Não foi possível encontrar o usuário", "Banco de dados", JOptionPane.ERROR_MESSAGE);
@@ -71,6 +74,9 @@ public class UserDAO extends Database {
                 userModel.setId(this.resultSet.getInt("id"));
                 userModel.setUsername(this.resultSet.getString("username"));
                 userModel.setPassword(this.resultSet.getString("password"));
+                userModel.setRepublicId(this.resultSet.getInt("republic_id"));
+                userModel.setCreatedAt(this.resultSet.getTimestamp("created_at"));
+                userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at"));
             }
         } catch (SQLException error) {
             JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário!", "Banco de dados", JOptionPane.ERROR_MESSAGE);

@@ -35,6 +35,7 @@ public class SignUpController {
     }
     
     public void toSignIn() {
+        this.signUpView.emptyFields();
         this.close();
         this.signInController.view();
     }

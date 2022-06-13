@@ -20,6 +20,11 @@ public class SignInView extends javax.swing.JFrame {
         this.signInController = signInController;
         initComponents();
     }
+    
+    public void emptyFields() {
+        this.usernameField.setText("");
+        this.passwordField.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
