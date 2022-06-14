@@ -5,6 +5,8 @@
 package Views;
 
 import Controllers.RepublicController;
+import Models.RepublicModel;
+import Models.UserModel;
 
 /**
  *
@@ -12,6 +14,21 @@ import Controllers.RepublicController;
  */
 public class UserView extends javax.swing.JFrame {
     private RepublicController republicController;
+    private UserModel user;
+    private RepublicModel republic;
+
+    public void setUser(UserModel user, RepublicModel republic) {
+        this.user = user;
+        this.republic = republic;
+
+        this.nameLabel.setText(user.getName());
+        this.userScoreLabel.setText("0.0");
+        this.feedbackPanel2.setVisible(false);
+        
+        if (this.republic != null) {
+            this.republicLabel2.setText("República: " + this.republic.getName());
+        }
+    }
     
     /**
      * Creates new form UserView
@@ -32,7 +49,6 @@ public class UserView extends javax.swing.JFrame {
 
         ContentPanel = new javax.swing.JPanel();
         republicLabel2 = new javax.swing.JLabel();
-        outRepublicButton2 = new javax.swing.JButton();
         feedbackPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         feedbacksTable2 = new javax.swing.JTable();
@@ -47,9 +63,6 @@ public class UserView extends javax.swing.JFrame {
 
         republicLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         republicLabel2.setText("República");
-
-        outRepublicButton2.setBackground(new java.awt.Color(176, 80, 82));
-        outRepublicButton2.setText("Remover da República");
 
         feedbackPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Feedbacks"));
 
@@ -87,7 +100,7 @@ public class UserView extends javax.swing.JFrame {
             feedbackPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(feedbackPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewFeedbackButton2)
                 .addContainerGap())
@@ -111,8 +124,7 @@ public class UserView extends javax.swing.JFrame {
                     .addComponent(feedbackPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(ContentPanelLayout.createSequentialGroup()
                         .addComponent(republicLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(outRepublicButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(174, 174, 174)))
                 .addContainerGap())
         );
         ContentPanelLayout.setVerticalGroup(
@@ -121,9 +133,7 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(nameLabel)
                 .addGap(18, 18, 18)
-                .addGroup(ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(republicLabel2)
-                    .addComponent(outRepublicButton2))
+                .addComponent(republicLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(userScoreLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -157,7 +167,6 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JTable feedbacksTable2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JButton outRepublicButton2;
     private javax.swing.JLabel republicLabel2;
     private javax.swing.JLabel userScoreLabel;
     private javax.swing.JButton viewFeedbackButton2;

@@ -169,7 +169,15 @@ public class RepublicController {
     }
     
     public void openUserView(String uuidUser) {
-        
+        UserModel user = this.userDAO.findByUuid(uuidUser);
+
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "Usuário não encontrado!", "Usuário", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        this.userView.setUser(user, this.republic);
+        this.userView.setVisible(true);
     }
     
     public void taskDone(TaskModel task) {

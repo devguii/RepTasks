@@ -528,14 +528,18 @@ public class RepublicView extends javax.swing.JFrame {
     }//GEN-LAST:event_openTaskButtonActionPerformed
 
     private void openUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openUserButtonActionPerformed
-        int selectedRow = this.usersTable.getSelectedRow();
-        if(selectedRow >= 0) {
-            try {
-                String uuidUser = (String) this.usersTable.getValueAt(selectedRow, 2);
-                this.republicController.openUserView(uuidUser);
-            } catch (Exception error) {
-                JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar o usuário!", "Usuário", JOptionPane.ERROR_MESSAGE);
+        try {
+            int selectedRow = this.usersTable.getSelectedRow();
+            if(selectedRow >= 0) {
+                try {
+                    String uuidUser = (String) this.usersTable.getValueAt(selectedRow, 2);
+                    this.republicController.openUserView(uuidUser);
+                } catch (Exception error) {
+                    JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar o usuário!", "Usuário", JOptionPane.ERROR_MESSAGE);
+                }
             }
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar o usuário!", "Usuário", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_openUserButtonActionPerformed
 

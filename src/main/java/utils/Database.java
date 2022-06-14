@@ -33,13 +33,13 @@ public class Database {
             this.connection.setAutoCommit(false);
             this.metaData = connection.getMetaData();
     
-            System.out.println("Connected to database");
-            System.out.println("Database name: " + metaData.getDatabaseProductName());
-            System.out.println("Database version: " + metaData.getDatabaseProductVersion());
-            System.out.println("Driver name: " + metaData.getDriverName());
-            System.out.println("Driver version: " + metaData.getDriverVersion());
-            System.out.println("URL: " + metaData.getURL());
-            System.out.println("User name: " + metaData.getUserName());
+            //System.out.println("Connected to database");
+            //System.out.println("Database name: " + metaData.getDatabaseProductName());
+            //System.out.println("Database version: " + metaData.getDatabaseProductVersion());
+            //System.out.println("Driver name: " + metaData.getDriverName());
+            //System.out.println("Driver version: " + metaData.getDriverVersion());
+            //System.out.println("URL: " + metaData.getURL());
+            //System.out.println("User name: " + metaData.getUserName());
         } catch (ClassNotFoundException error) {
             JOptionPane.showMessageDialog(null, "Class not found: " + error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException error) {
