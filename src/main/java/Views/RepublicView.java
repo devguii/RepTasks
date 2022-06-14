@@ -10,6 +10,7 @@ import Models.RepublicModel;
 import Models.TaskModel;
 import Models.UserModel;
 import java.util.ArrayList;
+import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,8 +54,25 @@ public class RepublicView extends javax.swing.JFrame {
         DefaultTableModel taskTableModel = (DefaultTableModel) this.tasksTable.getModel();
         taskTableModel.setRowCount(0);
         for (TaskModel taskModel : this.tasksModel) {
+            String name = "-";
+            
+            UUID userUuid = taskModel.getUserUuid();
+            
+            if (userUuid != null) {
+                UserModel userData = this.republicController.findUserByUuid(userUuid.toString());
+                if (userData != null) {
+                    name = userData.getName();
+                }
+            }
+            
+            String done = "A Fazer";
+            
+            if (taskModel.getIsDone()) {
+                done = "Feito";
+            }
+            
             Object[] row = {
-                taskModel.getTitle(), taskModel.getUserUuid(), taskModel.getIsDone(), taskModel.getExpiresAt(), taskModel.getUuid().toString(),
+                taskModel.getTitle(), name, done, taskModel.getExpiresAt(), taskModel.getUuid().toString(),
             };
             taskTableModel.addRow(row);
         }

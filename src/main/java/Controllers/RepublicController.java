@@ -209,6 +209,10 @@ public class RepublicController {
         }
     }
     
+    public UserModel findUserByUuid(String uuid) {
+        return this.userDAO.findByUuid(uuid);
+    }
+    
     public void logout() {
         this.close();
         this.signInController.viewDeleteSession();
