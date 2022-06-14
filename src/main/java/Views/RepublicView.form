@@ -66,9 +66,9 @@
                       <Component id="usersPanel" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="210" max="-2" attributes="0"/>
+                          <Component id="updateRepButton" min="-2" pref="210" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="210" max="-2" attributes="0"/>
+                          <Component id="deleteRepButton" min="-2" pref="210" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -80,8 +80,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateRepButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteRepButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="tasksPanel" min="-2" max="-2" attributes="0"/>
@@ -262,6 +262,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Adicionar Tarefa"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTaskButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -393,7 +396,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="updateRepButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="b4" red="b0" type="rgb"/>
@@ -404,7 +407,7 @@
             <Property name="text" type="java.lang.String" value="Alterar Rep&#xfa;blica"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="deleteRepButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="52" green="50" red="b0" type="rgb"/>
@@ -493,6 +496,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="isLoggedInLabel">
           <Properties>

@@ -4,16 +4,40 @@
  */
 package Views;
 
+import Controllers.RepublicController;
+import Models.UserModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.DefaultListModel;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gabri
  */
 public class AddTaskView extends javax.swing.JFrame {
+    private RepublicController republicController;
+    private ArrayList<UserModel> usersModel;
+    
+    public void setUsers(ArrayList<UserModel> usersModel) {
+        this.usersModel = usersModel;
+        this.setUserList();
+    }
+    
+    public void setUserList() {
+        DefaultListModel listModel = new DefaultListModel();
+        for (UserModel userModel : this.usersModel) {
+            listModel.addElement(userModel.getName());
+        }
+        this.userList.setModel(listModel);
+    }
 
     /**
      * Creates new form AddTaskView
      */
-    public AddTaskView() {
+    public AddTaskView(RepublicController republicController) {
+        this.republicController = republicController;
         initComponents();
     }
 
@@ -29,26 +53,37 @@ public class AddTaskView extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
         titleField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descriptionArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        userList = new javax.swing.JList<>();
+        addButton = new javax.swing.JButton();
+        expiresField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Tarefa"));
 
         titleField.setBorder(javax.swing.BorderFactory.createTitledBorder("Título"));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        descriptionArea.setColumns(20);
+        descriptionArea.setRows(5);
+        descriptionArea.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição"));
+        jScrollPane1.setViewportView(descriptionArea);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        userList.setBorder(javax.swing.BorderFactory.createTitledBorder("Responsável"));
+        userList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(userList);
+
+        addButton.setBackground(new java.awt.Color(76, 180, 82));
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setText("Criar Tarefa");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
         });
-        jScrollPane2.setViewportView(jList1);
+
+        expiresField.setBorder(javax.swing.BorderFactory.createTitledBorder("Expiração / Deadline"));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -57,12 +92,17 @@ public class AddTaskView extends javax.swing.JFrame {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(titleField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 319, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(titleField, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(expiresField)))
                 .addContainerGap())
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,8 +111,12 @@ public class AddTaskView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(expiresField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(addButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,47 +139,37 @@ public class AddTaskView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTaskView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTaskView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTaskView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTaskView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        String title = this.titleField.getText().trim();
+        String description = this.descriptionArea.getText();
+        String deadline = this.expiresField.getText();
+        int userId = this.userList.getSelectedIndex();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddTaskView().setVisible(true);
-            }
-        });
-    }
+        String userUuid = this.usersModel.get(userId).getUuid().toString();
+
+        if (title.isEmpty() || description.isEmpty() || deadline.isEmpty() || userId == -1 || userUuid.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos corretamente", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            LocalDateTime expiresAt = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+            this.republicController.addTask(title, description, userUuid, expiresAt);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Data inválida", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JTextArea descriptionArea;
+    private javax.swing.JTextField expiresField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField titleField;
+    private javax.swing.JList<String> userList;
     // End of variables declaration//GEN-END:variables
 }

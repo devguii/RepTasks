@@ -19,8 +19,6 @@ public class TaskModel {
     private String description;
     private UUID republicUuid;
     private UUID userUuid;
-    private RepublicModel republic;
-    private UserModel user;
     private boolean isDone;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -60,14 +58,6 @@ public class TaskModel {
         }
     }
     
-    public void setRepublic(RepublicModel republic) {
-        this.republic = republic;
-    }
-    
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-    
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -100,16 +90,8 @@ public class TaskModel {
         return this.userUuid;
     }
     
-    public RepublicModel getRepublic() {
-        return this.republic;
-    }
-    
     public UUID getRepublicUuid() {
         return this.republicUuid;
-    }
-    
-    public UserModel getUser() {
-        return this.user;
     }
     
     public boolean getIsDone() {

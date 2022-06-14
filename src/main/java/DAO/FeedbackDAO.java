@@ -105,7 +105,33 @@ public class FeedbackDAO extends Database {
             this.connection.rollback();
         } finally {
             return feedback;
+        }   
+    }
+
+    public ArrayList<FeedbackModel> findAllByUserUuid(String userUuid) {
+        ArrayList<FeedbackModel> feedbacks = new ArrayList<>();
+        try {
+            this.preparedStatement = this.connection.prepareStatement("SELECT * FROM Feedbacks WHERE user_uuid = ?");
+            PGobject userUuidObject = new PGobject();
+            userUuidObject.setType("uuid");
+            userUuidObject.setValue(userUuid);
+            this.preparedStatement.setObject(1, userUuidObject);
+            this.resultSet = this.preparedStatement.executeQuery();
+            
+            while (this.resultSet.next()) {
+                FeedbackModel feedback = new FeedbackModel();
+                feedback.setUuid(this.resultSet.getString("uuid"));
+                feedback.setUserUuid(this.resultSet.getString("user_uuid"));
+                feedback.setTaskUuid(this.resultSet.getString("task_uuid"));
+                feedback.setComment(this.resultSet.getString("comment"));
+                feedback.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
+                feedback.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                feedbacks.add(feedback);
+            }
+        } catch (SQLException error) {
+            this.connection.rollback();
+        } finally {
+            return feedbacks;
         }
-        
     }
 }

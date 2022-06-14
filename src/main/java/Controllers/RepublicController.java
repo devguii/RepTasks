@@ -12,11 +12,13 @@ import Models.FeedbackModel;
 import Models.RepublicModel;
 import Models.TaskModel;
 import Models.UserModel;
+import Views.AddTaskView;
 import Views.RepublicView;
 import Views.TaskView;
 import Views.UserView;
 import com.password4j.Hash;
 import com.password4j.Password;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -41,6 +43,7 @@ public class RepublicController {
     private TaskView taskView;
     private UserView userView;
     private FeedbackDAO feedbackDAO;
+    private AddTaskView addTaskView;
     
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
@@ -61,6 +64,7 @@ public class RepublicController {
         this.taskView = new TaskView(this);
         this.userView = new UserView(this);
         this.feedbackDAO = new FeedbackDAO();
+        this.addTaskView = new AddTaskView(this);
     }
     
     public void view() {
@@ -75,6 +79,8 @@ public class RepublicController {
         this.user = this.userDAO.findByUuid(this.userUuid);
         
         if (this.user != null) {
+            this.republicView.setIsLoggedInLabel(this.user.getName());
+            
             this.republicView.setUser(user);
             this.republic = this.republicDAO.findByUuid(this.user.getRepublicUuid().toString());
             
@@ -90,6 +96,24 @@ public class RepublicController {
             
             this.republicView.setTasks(tasks);
             this.republicView.setUsers(users);
+            
+            double score = 0.0;
+            double i = 0;
+            
+            for (FeedbackModel feedback : this.feedbackDAO.findAllByUserUuid(this.user.getUuid().toString())) {
+                score += feedback.getScore();
+                i++;
+            }
+            
+            if (i != 0) {
+                score /= i;
+            }
+            
+            this.republicView.setScore(score);
+            
+            if (!this.user.getUuid().equals(this.republic.getUserUuid())) {
+                this.republicView.setNotAdministrator();
+            }
             
             this.republicView.load();
         } else {
@@ -152,5 +176,40 @@ public class RepublicController {
         this.taskView.setFeedbackModel(feedback);
         this.taskView.load();
         this.taskView.setVisible(true);
+    }
+    
+    public void addTask(String title, String description, String userUuid, LocalDateTime expiresAt) {
+        TaskModel task = new TaskModel();
+        
+        task.setTitle(title);
+        task.setDescription(description);
+        task.setUserUuid(userUuid);
+        task.setExpiresAt(expiresAt);
+        
+        if (!expiresAt.isAfter(LocalDateTime.now())) {
+            JOptionPane.showMessageDialog(null, "Data de expiração inválida!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!this.taskDAO.create(task)) {
+            JOptionPane.showMessageDialog(null, "Não foi possível criar a tarefa!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        this.load();
+        JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Tarefas", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    public void openAddTaskView() {
+        if (this.republic.getUserUuid().equals(this.user.getUuid())) {
+            this.addTaskView.setUsers(this.users);
+            this.addTaskView.setVisible(true);
+        }
+    }
+    
+    public void logout() {
+        this.close();
+        this.signInController.viewDeleteSession();
     }
 }

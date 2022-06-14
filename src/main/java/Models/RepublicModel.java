@@ -18,9 +18,6 @@ public class RepublicModel {
     private String name;
     private String password;
     private UUID userUuid;
-    private UserModel userOwner;
-    private ArrayList<TaskModel> tasks;
-    private ArrayList<UserModel> users;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
@@ -50,18 +47,6 @@ public class RepublicModel {
         }
     }
     
-    public void setUserOwner(UserModel userOwner) {
-        this.userOwner = userOwner;
-    }
-    
-    public void setTasks(ArrayList<TaskModel> tasks) {
-        this.tasks = tasks;
-    }
-    
-    public void setUsers(ArrayList<UserModel> users) {
-        this.users = users;
-    }
-    
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -84,18 +69,6 @@ public class RepublicModel {
     
     public UUID getUserUuid() {
         return this.userUuid;
-    }
-    
-    public UserModel getUserOwner() {
-        return this.userOwner;
-    }
-    
-    public ArrayList<TaskModel> getTasks() {
-        return this.tasks;
-    }
-    
-    public ArrayList<UserModel> getUsers() {
-        return this.users;
     }
     
     public LocalDateTime getCreatedAt() {

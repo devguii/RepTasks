@@ -19,8 +19,6 @@ public class UserModel {
     private String username;
     private String password;
     private UUID republicUuid;
-    private RepublicModel republic;
-    private ArrayList<TaskModel> tasks;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
@@ -58,14 +56,6 @@ public class UserModel {
         }
     }
     
-    public void setRepublic(RepublicModel republic) {
-        this.republic = republic;
-    }
-    
-    public void setTasks(ArrayList<TaskModel> tasks) {
-        this.tasks = tasks;
-    }
-    
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -88,14 +78,6 @@ public class UserModel {
     
     public UUID getRepublicUuid() {
         return this.republicUuid;
-    }
-    
-    public RepublicModel getRepublic() {
-        return this.republic;
-    }
-    
-    public ArrayList<TaskModel> getTasks() {
-        return this.tasks;
     }
     
     public LocalDateTime getCreatedAt() {

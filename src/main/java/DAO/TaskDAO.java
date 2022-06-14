@@ -75,4 +75,33 @@ public class TaskDAO extends Database {
             return taskModel;
         }
     }
+
+    public boolean create(TaskModel taskModel) {
+        try {
+            this.preparedStatement = this.connection.prepareStatement("INSERT INTO Tasks (title, description, is_done, republic_uuid, user_uuid) VALUES (?, ?, ?, ?, ?)");
+
+            PGobject republicUuidObject = new PGobject();
+            republicUuidObject.setType("uuid");
+            republicUuidObject.setValue(taskModel.getRepublicUuid().toString());
+
+            PGobject userUuidObject = new PGobject();
+            userUuidObject.setType("uuid");
+            userUuidObject.setValue(taskModel.getUserUuid().toString());
+
+            this.preparedStatement.setString(1, taskModel.getTitle());
+            this.preparedStatement.setString(2, taskModel.getDescription());
+            this.preparedStatement.setObject(3, republicUuidObject);
+            this.preparedStatement.setObject(4, userUuidObject);
+            this.preparedStatement.setObject(5, republicUuidObject);
+            this.preparedStatement.setObject(6, userUuidObject);
+            this.preparedStatement.executeUpdate();
+            this.connection.commit();
+        } catch (SQLException error) {
+            this.connection.rollback();
+            return false;
+        } finally {
+            return true;
+        }
+    }
+
 }

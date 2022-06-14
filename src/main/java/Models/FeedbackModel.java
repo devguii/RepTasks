@@ -18,8 +18,6 @@ public class FeedbackModel {
     private double score;
     private UUID userUuid;
     private UUID taskUuid;
-    private UserModel user;
-    private TaskModel task;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
@@ -57,14 +55,6 @@ public class FeedbackModel {
         }
     }
     
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-    
-    public void setTask(TaskModel task) {
-        this.task = task;
-    }
-    
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -91,14 +81,6 @@ public class FeedbackModel {
     
     public UUID getTaskUuid() {
         return this.taskUuid;
-    }
-    
-    public UserModel getUser() {
-        return this.user;
-    }
-    
-    public TaskModel getTask() {
-        return this.task;
     }
     
     public LocalDateTime getCreatedAt() {
