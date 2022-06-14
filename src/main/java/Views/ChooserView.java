@@ -4,16 +4,24 @@
  */
 package Views;
 
+import Controllers.RepublicController;
+
 /**
  *
  * @author gabri
  */
 public class ChooserView extends javax.swing.JFrame {
-
+    private RepublicController republicController;
+    
+    public void closeView() {
+        this.dispose();
+    }
+    
     /**
      * Creates new form ChooserView
      */
-    public ChooserView() {
+    public ChooserView(RepublicController republicController) {
+        this.republicController = republicController;
         initComponents();
     }
 
@@ -36,13 +44,6 @@ public class ChooserView extends javax.swing.JFrame {
         enterNameRepublicField = new javax.swing.JTextField();
         enterPasswordRepublicField = new javax.swing.JPasswordField();
         enterREpublicButton = new javax.swing.JButton();
-        menuPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        myProfileButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
-        isLoggedInLabel = new javax.swing.JLabel();
-        scoreLabel = new javax.swing.JLabel();
-        tasksDoneLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -60,6 +61,11 @@ public class ChooserView extends javax.swing.JFrame {
         createRepublicButton.setBackground(new java.awt.Color(76, 180, 82));
         createRepublicButton.setForeground(new java.awt.Color(255, 255, 255));
         createRepublicButton.setText("Criar República");
+        createRepublicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createRepublicButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout createRepublicPanelLayout = new javax.swing.GroupLayout(createRepublicPanel);
         createRepublicPanel.setLayout(createRepublicPanelLayout);
@@ -99,6 +105,11 @@ public class ChooserView extends javax.swing.JFrame {
         enterREpublicButton.setBackground(new java.awt.Color(76, 180, 82));
         enterREpublicButton.setForeground(new java.awt.Color(255, 255, 255));
         enterREpublicButton.setText("Entrar na República");
+        enterREpublicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterREpublicButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout enterRepublicPanelLayout = new javax.swing.GroupLayout(enterRepublicPanel);
         enterRepublicPanel.setLayout(enterRepublicPanelLayout);
@@ -147,66 +158,12 @@ public class ChooserView extends javax.swing.JFrame {
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
-        menuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
-
-        logoLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("REPTASKS");
-
-        myProfileButton.setText("Meu Perfil");
-
-        logoutButton.setText("Sair");
-
-        isLoggedInLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        isLoggedInLabel.setText("Usuário");
-
-        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scoreLabel.setText("Score: x.xx");
-
-        tasksDoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tasksDoneLabel.setText("Tarefas: [x / x]");
-
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tasksDoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(isLoggedInLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scoreLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tasksDoneLabel)
-                .addGap(24, 24, 24)
-                .addComponent(myProfileButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoutButton)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -214,14 +171,27 @@ public class ChooserView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createRepublicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRepublicButtonActionPerformed
+        String name = this.createNameRepublicField.getText();
+        String password = String.valueOf(this.createRepublicPasswordField.getPassword());
+        String passwordConfirm = String.valueOf(this.createNewRepublicPasswordField.getPassword());
+        
+        this.republicController.createRepublic(name, password, passwordConfirm);
+    }//GEN-LAST:event_createRepublicButtonActionPerformed
+
+    private void enterREpublicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterREpublicButtonActionPerformed
+        String name = this.enterNameRepublicField.getText();
+        String password = String.valueOf(this.enterPasswordRepublicField.getPassword());
+        
+        this.republicController.enterRepublic(name, password);
+    }//GEN-LAST:event_enterREpublicButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
@@ -234,12 +204,5 @@ public class ChooserView extends javax.swing.JFrame {
     private javax.swing.JPasswordField enterPasswordRepublicField;
     private javax.swing.JButton enterREpublicButton;
     private javax.swing.JPanel enterRepublicPanel;
-    private javax.swing.JLabel isLoggedInLabel;
-    private javax.swing.JLabel logoLabel;
-    private javax.swing.JButton logoutButton;
-    private javax.swing.JPanel menuPanel;
-    private javax.swing.JButton myProfileButton;
-    private javax.swing.JLabel scoreLabel;
-    private javax.swing.JLabel tasksDoneLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -72,8 +72,8 @@ public class SignInController {
     }
     
     public void viewDeleteSession() {
-        this.view();
         this.signInView.emptyFields();
+        this.view();
         this.republicController = null;
         this.republicController = new RepublicController(this);
     }

@@ -8,6 +8,7 @@ import Controllers.RepublicController;
 import Models.FeedbackModel;
 import Models.TaskModel;
 import Models.UserModel;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -20,6 +21,10 @@ public class TaskView extends javax.swing.JFrame {
     
     private FeedbackModel feedbackModel;
     private boolean isResponsible;
+    
+    public void closeView() {
+        this.dispose();
+    }
     
     public void setTaskModel(TaskModel taskModel) {
         this.taskModel = taskModel;
@@ -37,14 +42,24 @@ public class TaskView extends javax.swing.JFrame {
         this.titleLabel.setText(this.taskModel.getTitle());
         this.descriptionPanel.setText(this.taskModel.getDescription());
         this.userOwnerLabel.setText("Responsável: " + this.userModel.getName());
+        this.createdLabel.setText("Data de criação: " + this.taskModel.getCreatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        this.expiresLabel.setText("Data de expiração: " + this.taskModel.getExpiresAt().toString().replace("T", " "));
+        
+        if (this.taskModel.getUpdatedAt() == null) {
+            this.updatedLabel.setText("Data de atualização: -");
+        } else {
+            this.updatedLabel.setText("Data de atualização: " + this.taskModel.getUpdatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        }
         
         if (this.userModel.getUuid().equals(taskModel.getUserUuid())) {
             this.feedbackPanel.setVisible(false);
             return;
         }
         
-        this.commentArea.setText(this.feedbackModel.getComment());
-        this.scoreSpinner.setValue(this.feedbackModel.getScore());
+        this.feedbackPanel.setVisible(false);
+        
+        //this.commentArea.setText(this.feedbackModel.getComment());
+        //this.scoreSpinner.setValue(this.feedbackModel.getScore());
     }
 
     /**
@@ -90,6 +105,7 @@ public class TaskView extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Título");
 
+        descriptionPanel.setEditable(false);
         descriptionPanel.setFont(new java.awt.Font("sansserif", 0, 13)); // NOI18N
         descriptionPanel.setText("Lorem ipsum dolor sit amet consectetur adipiscing elit ridiculus duis, mus scelerisque rhoncus vehicula pellentesque et mollis vel eros, primis fames dictum nisi per ultrices odio id. Sem nec scelerisque lectus elementum class tincidunt leo penatibus, consequat volutpat interdum fames accumsan nullam ornare sollicitudin proin, erat integer nibh fusce augue eu porta. Nisi ut placerat ante diam accumsan fusce laoreet, ac a dis aliquam quis vulputate, mollis ad sapien parturient lacus dictumst.");
         scrollPanel.setViewportView(descriptionPanel);
@@ -107,6 +123,11 @@ public class TaskView extends javax.swing.JFrame {
         doneTaskButton.setBackground(new java.awt.Color(76, 180, 82));
         doneTaskButton.setForeground(new java.awt.Color(255, 255, 255));
         doneTaskButton.setText("Concluir Tarefa");
+        doneTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doneTaskButtonActionPerformed(evt);
+            }
+        });
 
         feedbackPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Feedback"));
 
@@ -223,6 +244,10 @@ public class TaskView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void doneTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneTaskButtonActionPerformed
+        this.republicController.taskDone(this.taskModel);
+    }//GEN-LAST:event_doneTaskButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea commentArea;

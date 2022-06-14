@@ -13,6 +13,8 @@ import Models.RepublicModel;
 import Models.TaskModel;
 import Models.UserModel;
 import Views.AddTaskView;
+import Views.ChooserView;
+import Views.EditTaskView;
 import Views.RepublicView;
 import Views.TaskView;
 import Views.UserView;
@@ -44,6 +46,8 @@ public class RepublicController {
     private UserView userView;
     private FeedbackDAO feedbackDAO;
     private AddTaskView addTaskView;
+    private EditTaskView editTaskView;
+    private ChooserView chooserView;
     
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
@@ -65,6 +69,9 @@ public class RepublicController {
         this.userView = new UserView(this);
         this.feedbackDAO = new FeedbackDAO();
         this.addTaskView = new AddTaskView(this);
+        this.editTaskView = new EditTaskView(this);
+        this.chooserView = new ChooserView(this);
+        this.republicView.invisibleContentPanel();
     }
     
     public void view() {
@@ -82,12 +89,15 @@ public class RepublicController {
             this.republicView.setIsLoggedInLabel(this.user.getName());
             
             this.republicView.setUser(user);
-            this.republic = this.republicDAO.findByUuid(this.user.getRepublicUuid().toString());
             
-            if (this.republic == null) {
-                System.out.println("Republic is null - load()");
+            if (this.user.getRepublicUuid() == null) {
+                this.chooserView.setVisible(true);
                 return;
             }
+            
+            this.republicView.visibleContentPanel();
+            
+            this.republic = this.republicDAO.findByUuid(this.user.getRepublicUuid().toString());
             
             this.republicView.setRepublic(republic);
             
@@ -117,7 +127,7 @@ public class RepublicController {
             
             this.republicView.load();
         } else {
-            this.signInController.view();
+            this.logout();
             this.close();
         }
     }
@@ -162,6 +172,27 @@ public class RepublicController {
         
     }
     
+    public void taskDone(TaskModel task) {
+        if (task.getUuid() == null) {
+            JOptionPane.showMessageDialog(null, "Tarefa não encontrada!", "Tarefa", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        task = this.taskDAO.findByUuid(task.getUuid().toString());
+        
+        if (task == null) {
+            JOptionPane.showMessageDialog(null, "Tarefa não encontrada!", "Tarefa", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        task.setIsDone(true);
+        task = this.taskDAO.update(task);
+        
+        JOptionPane.showMessageDialog(null, "Tarefa completada com sucesso!", "Tarefa", JOptionPane.INFORMATION_MESSAGE);
+        this.load();
+        this.taskView.closeView();
+    }
+    
     public void openTaskView(String uuidTask) {
         TaskModel task = this.taskDAO.findByUuid(uuidTask);
         FeedbackModel feedback = this.feedbackDAO.findByTaskUuidAndUserUuid(uuidTask, this.userUuid);
@@ -197,20 +228,172 @@ public class RepublicController {
             return;
         }
 
+        this.addTaskView.closeTask();
         this.load();
         JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Tarefas", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    public void editTask(String uuid, String title, String description, String userUuid, LocalDateTime expiresAt) {
+        TaskModel task = this.taskDAO.findByUuid(uuid);
+        
+        if (task == null) {
+            JOptionPane.showMessageDialog(null, "Tarefa inexistente!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!expiresAt.isAfter(LocalDateTime.now())) {
+            JOptionPane.showMessageDialog(null, "Data de expiração inválida!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        task.setTitle(title);
+        task.setDescription(description);
+        task.setExpiresAt(expiresAt);
+        task.setUserUuid(userUuid);
+        
+        task = this.taskDAO.update(task);
+        this.editTaskView.closeView();
+        this.load();
+        JOptionPane.showMessageDialog(null, "Tarefa editada com sucesso!", "Tarefas", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    public void deleteTask(String uuid) {
+        TaskModel task = this.taskDAO.findByUuid(uuid);
+        
+        if (task == null) {
+            JOptionPane.showMessageDialog(null, "Tarefa inexistente!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!this.taskDAO.delete(task)) {
+            JOptionPane.showMessageDialog(null, "Não foi possível deletar a tarefa!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.load();
+        JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "Tarefas", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    public void createRepublic(String name, String password, String passwordConfirm) {
+        if (!password.equals(passwordConfirm)) {
+            JOptionPane.showMessageDialog(null, "As senhas não se coincide", "República", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (name.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Não foi possível criar a república!", "República", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        RepublicModel republicModel = new RepublicModel();
+        republicModel.setName(name);
+        Hash passwordHashed = Password.hash(password).addRandomSalt().withArgon2();
+        republicModel.setPassword(passwordHashed.getResult());
+        republicModel.setUserUuid(this.user.getUuid().toString());
+        
+        if (!this.republicDAO.create(republicModel)) {
+            JOptionPane.showMessageDialog(null, "Não foi possível criar a república!", "República", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.republic = this.republicDAO.findByName(republicModel.getName());
+        
+        this.user.setRepublicUuid(republic.getUuid().toString());
+        
+        this.user = this.userDAO.update(this.user);
+        
+        this.chooserView.closeView();
+        this.load();
+        JOptionPane.showMessageDialog(null, "República criada com sucesso!", "República", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    public void enterRepublic(String name, String password) {
+        RepublicModel republic = this.republicDAO.findByName(name);
+        
+        if (republic == null) {
+            JOptionPane.showMessageDialog(null, "República inexistente!", "República", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!Password.check(password, republic.getPassword()).withArgon2()) {
+            JOptionPane.showMessageDialog(null, "Senha inválida!", "República", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.user.setRepublicUuid(republic.getUuid().toString());
+        this.user = this.userDAO.update(this.user);
+        this.load();
+        this.chooserView.closeView();
+        JOptionPane.showMessageDialog(null, "Você entrou na república com sucesso!", "República", JOptionPane.INFORMATION_MESSAGE);
         return;
     }
     
     public void openAddTaskView() {
         if (this.republic.getUserUuid().equals(this.user.getUuid())) {
+            this.addTaskView.emptyFields();
             this.addTaskView.setUsers(this.users);
             this.addTaskView.setVisible(true);
         }
     }
     
+    public void openEditTaskView(String uuidTask) {
+        if (this.republic.getUserUuid().equals(this.user.getUuid())) {
+            this.editTaskView.setUsers(this.users);
+            TaskModel task = this.taskDAO.findByUuid(uuidTask);
+            
+            if (task == null) {
+                JOptionPane.showMessageDialog(null, "Não foi possível encontrar a tarefa!", "Tarefa", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            this.editTaskView.setTaskModel(task);
+            
+            if (task.getUserUuid() != null) {
+                UserModel selectedUser = this.userDAO.findByUuid(task.getUserUuid().toString());
+                this.editTaskView.setSelectedUser(selectedUser);
+            }
+            
+            this.editTaskView.load();
+            this.editTaskView.setVisible(true);
+        }
+    }
+    
     public UserModel findUserByUuid(String uuid) {
         return this.userDAO.findByUuid(uuid);
+    }
+    
+    public void deleteUser(String userUuid) {
+        UserModel user = this.userDAO.findByUuid(userUuid);
+        
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "Usuário inexistente!", "Usuário", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!user.getRepublicUuid().equals(this.republic.getUuid())) {
+            JOptionPane.showMessageDialog(null, "Usuário não pertence à república!", "Usuário", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (userUuid.equals(this.user.getUuid().toString())) {
+            JOptionPane.showMessageDialog(null, "Você não pode deletar a si mesmo!", "Usuário", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!this.userDAO.removeRepublic(user, this.republic)) {
+            JOptionPane.showMessageDialog(null, "Não foi possível deletar o usuário!", "Usuário", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.taskDAO.updateAllTasksOfUser(user, this.republic);
+        
+        this.load();
+        JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!", "Usuário", JOptionPane.INFORMATION_MESSAGE);
+        return;
     }
     
     public void logout() {

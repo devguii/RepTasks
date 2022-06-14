@@ -88,6 +88,7 @@ public class RepublicDAO extends Database {
                 this.connection.rollback();
             }
         } catch (SQLException error) {
+            System.out.println(error.getMessage());
             this.connection.rollback();
         } finally {
             return isCreated;

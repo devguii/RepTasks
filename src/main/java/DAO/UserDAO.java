@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import Models.RepublicModel;
 import Models.UserModel;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -169,6 +170,33 @@ public class UserDAO extends Database {
             JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
         } finally {
             return users;
+        }
+    }
+
+    public boolean removeRepublic(UserModel user, RepublicModel republic) {
+        try {
+            this.preparedStatement = this.connection.prepareStatement("UPDATE Users SET republic_uuid = null WHERE uuid = ? and republic_uuid = ?");
+            PGobject userUuid = new PGobject();
+            userUuid.setType("uuid");
+            userUuid.setValue(user.getUuid().toString());
+            this.preparedStatement.setObject(1, userUuid);
+            PGobject republicUuid = new PGobject();
+            republicUuid.setType("uuid");
+            republicUuid.setValue(republic.getUuid().toString());
+            this.preparedStatement.setObject(2, republicUuid);
+            int result = this.preparedStatement.executeUpdate();
+            
+            if (result == 1) {
+                this.connection.commit();
+                return true;
+            } else {
+                this.connection.rollback();
+                return false;
+            }
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 }

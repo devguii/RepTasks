@@ -5,30 +5,26 @@
 package Views;
 
 import Controllers.RepublicController;
+import Models.TaskModel;
 import Models.UserModel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.DefaultListModel;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author gabri
  */
-public class AddTaskView extends javax.swing.JFrame {
+public class EditTaskView extends javax.swing.JFrame {
     private RepublicController republicController;
     private ArrayList<UserModel> usersModel;
+    private TaskModel taskModel;
+    private UserModel selectedUser;
     
-    public void closeTask() {
-        this.dispose();;
-    }
-    
-    public void emptyFields() {
-        this.usersModel = null;
-        this.titleField.setText("");
-        this.descriptionArea.setText("");
-        this.expiresField.setText("");
+    public void closeView() {
+        this.dispose();
     }
     
     public void setUsers(ArrayList<UserModel> usersModel) {
@@ -43,11 +39,43 @@ public class AddTaskView extends javax.swing.JFrame {
         }
         this.userList.setModel(listModel);
     }
-
+    
+    public void setSelectedUser(UserModel user) {
+        this.selectedUser = user;
+    }
+    
+    public void setTaskModel(TaskModel task) {
+        this.taskModel = task;
+    }
+    
+    public void load() {
+        this.titleField.setText(this.taskModel.getTitle());
+        this.descriptionArea.setText(this.taskModel.getDescription());
+        
+        if (this.taskModel.getExpiresAt() != null) {
+            try {
+                String expires = this.taskModel.getExpiresAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                this.expiresField.setText(expires);
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
+            }
+        }
+        
+        if (this.selectedUser != null) {
+            int id = 0;
+            for (UserModel user : this.usersModel) {
+                if (user.getUuid().equals(this.selectedUser.getUuid())) {
+                    this.userList.setSelectedIndex(id);
+                }
+                id++;
+            }
+        }
+    }
+            
     /**
-     * Creates new form AddTaskView
+     * Creates new form EditTaskView
      */
-    public AddTaskView(RepublicController republicController) {
+    public EditTaskView(RepublicController republicController) {
         this.republicController = republicController;
         initComponents();
     }
@@ -67,7 +95,7 @@ public class AddTaskView extends javax.swing.JFrame {
         descriptionArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         userList = new javax.swing.JList<>();
-        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
         expiresField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,12 +113,12 @@ public class AddTaskView extends javax.swing.JFrame {
         userList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(userList);
 
-        addButton.setBackground(new java.awt.Color(76, 180, 82));
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Criar Tarefa");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        editButton.setBackground(new java.awt.Color(176, 180, 82));
+        editButton.setForeground(new java.awt.Color(255, 255, 255));
+        editButton.setText("Atualizar Tarefa");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                editButtonActionPerformed(evt);
             }
         });
 
@@ -112,7 +140,7 @@ public class AddTaskView extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addGap(160, 160, 160)
-                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(171, Short.MAX_VALUE))
         );
         contentPanelLayout.setVerticalGroup(
@@ -126,7 +154,7 @@ public class AddTaskView extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(expiresField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(addButton)
+                .addComponent(editButton)
                 .addContainerGap())
         );
 
@@ -150,7 +178,7 @@ public class AddTaskView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         String title = this.titleField.getText().trim();
         String description = this.descriptionArea.getText();
         String deadline = this.expiresField.getText();
@@ -166,17 +194,17 @@ public class AddTaskView extends javax.swing.JFrame {
         try {
             LocalDateTime expiresAt = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
-            this.republicController.addTask(title, description, userUuid, expiresAt);
+            this.republicController.editTask(this.taskModel.getUuid().toString(), title, description, userUuid, expiresAt);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Data inválida", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-    }//GEN-LAST:event_addButtonActionPerformed
+    }//GEN-LAST:event_editButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JTextArea descriptionArea;
+    private javax.swing.JButton editButton;
     private javax.swing.JTextField expiresField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
