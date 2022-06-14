@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author Gabriel Barbosa Silva 2211114
  */
-public class SignInController {
+public class SignInController {   
     private SignInView signInView;
     private SignUpController signUpController;
     private RepublicController republicController;

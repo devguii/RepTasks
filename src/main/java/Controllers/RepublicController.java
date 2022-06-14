@@ -9,7 +9,6 @@ import DAO.UserDAO;
 import Models.RepublicModel;
 import Models.TaskModel;
 import Models.UserModel;
-import Views.Partials.ChooserEnterCreate;
 import Views.RepublicView;
 import com.password4j.Hash;
 import com.password4j.Password;
@@ -39,7 +38,6 @@ public class RepublicController {
     }
     
     public void view() {
-        this.republicView.viewContentPanel();
         this.republicView.setVisible(true);
     }
     
@@ -54,7 +52,7 @@ public class RepublicController {
     public void setRepublic() {
         String republicUuid = this.user.getRepublicUuid().toString();
         this.republic = this.republicDAO.findByUuid(republicUuid);
-        this.republicView.setRepublic(this.republic);
+        //this.republicView.setRepublic(this.republic);
     }
     
     public void setUser(UserModel user) {
@@ -97,7 +95,7 @@ public class RepublicController {
             this.setUser(this.user);
 
             JOptionPane.showMessageDialog(null, "República criada com sucesso!", "República", JOptionPane.INFORMATION_MESSAGE);
-            this.republicView.viewTasksView();
+            //this.republicView.viewTasksView();
             return;
         }
         

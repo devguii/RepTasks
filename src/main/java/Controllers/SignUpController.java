@@ -32,6 +32,7 @@ public class SignUpController {
     
     public void close() {
         this.signUpView.setVisible(false);
+        this.signUpView.dispose();
     }
     
     public void toSignIn() {
