@@ -4,8 +4,11 @@
  */
 package Views.Partials;
 
+import Models.FeedbackModel;
+import Models.TaskModel;
 import Models.UserModel;
 import Views.RepublicView;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +17,7 @@ import Views.RepublicView;
 public class MenuPanel extends javax.swing.JPanel {
     private RepublicView republicView;
     private UserModel user;
-    
+    private ArrayList<FeedbackModel> feedbacks;
     
     public void setRepublicView(RepublicView republicView) {
         this.republicView = republicView;
@@ -26,18 +29,35 @@ public class MenuPanel extends javax.swing.JPanel {
         this.setScore();
     }
     
+    public void setFeedbacks(ArrayList<FeedbackModel> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+    
     public void setProfile() {
         this.welcomeLabel.setText("Bem vindo, " + this.user.getUsername());
     }
     
     public void setScore() {
-        this.scoreLabel.setText("Seu Score: " + 0);
+        double i = 0, media = 0;
+        
+        for (FeedbackModel feedback : this.feedbacks) {
+            media += feedback.getScore();
+            i++;
+        }
+        
+        media /= i;
+        
+        this.scoreLabel.setText("Seu Score: " + media);
     }
     
-    public void setChooserEnterCreate() {
+    public void setChooserEnterCreateMenu() {
         this.adminButton.setVisible(false);
         this.myTasksButton.setVisible(false);
         this.tasksRepButton.setVisible(false);
+    }
+    
+    public void setUserMenu() {
+        this.adminButton.setVisible(false);
     }
     
     /**

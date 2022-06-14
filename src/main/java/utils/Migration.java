@@ -16,50 +16,51 @@ public class Migration extends Database {
     
     public Migration() {
         String[] migration = {
+            "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";",
             "CREATE TABLE IF NOT EXISTS public.Users("
-                + "id SERIAL NOT NULL PRIMARY KEY, "
+                + "uuid UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(), "
                 + "username VARCHAR(255) NOT NULL UNIQUE, "
                 + "password VARCHAR(255) NOT NULL, "
                 + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
                 + "updated_at TIMESTAMP NULL"
                 + ");",
             "CREATE TABLE IF NOT EXISTS public.Republic("
-                + "id SERIAL NOT NULL PRIMARY KEY, "
+                + "uuid UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(), "
                 + "name VARCHAR(255) NOT NULL, "
-                + "user_id INT NOT NULL, "
-                + "FOREIGN KEY (user_id) REFERENCES Users(id), "
+                + "password VARCHAR(255) NOT NULL, "
+                + "user_uuid UUID NOT NULL,"
+                + "FOREIGN KEY (user_uuid) REFERENCES Users(uuid), "
                 + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
                 + "updated_at TIMESTAMP NULL"
                 + ");",
             "ALTER TABLE public.Users "
-                + "ADD COLUMN republic_id INT NULL DEFAULT NULL, "
-                + "ADD FOREIGN KEY (republic_id) REFERENCES Republic(id);",
+                + "ADD COLUMN republic_uuid UUID NULL DEFAULT NULL, "
+                + "ADD FOREIGN KEY (republic_uuid) REFERENCES Republic(uuid);",
             "CREATE TABLE IF NOT EXISTS public.Tasks("
-                + "id SERIAL NOT NULL PRIMARY KEY, "
+                + "uuid UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(), "
                 + "title VARCHAR(255) NOT NULL, "
                 + "description VARCHAR(255) NOT NULL, "
-                + "republic_id INT NOT NULL, "
-                + "user_id INT NOT NULL, "
+                + "republic_uuid UUID NOT NULL, "
+                + "user_uuid UUID NOT NULL, "
                 + "is_done SMALLINT NOT NULL DEFAULT 0, "
-                + "FOREIGN KEY (republic_id) REFERENCES Republic(id), "
-                + "FOREIGN KEY (user_id) REFERENCES Users(id), "
+                + "FOREIGN KEY (republic_uuid) REFERENCES Republic(uuid), "
+                + "FOREIGN KEY (user_uuid) REFERENCES Users(uuid), "
                 + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
                 + "updated_at TIMESTAMP NULL,"
                 + "expires_at TIMESTAMP NOT NULL"
                 + ");",
             "CREATE TABLE IF NOT EXISTS public.Feedbacks("
-                + "id SERIAL NOT NULL PRIMARY KEY, "
+                + "uuid UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(), "
                 + "comment TEXT NULL, "
                 + "score DECIMAL NOT NULL, "
-                + "user_id INT NOT NULL, "
-                + "task_id INT NOT NULL, "
-                + "FOREIGN KEY (user_id) REFERENCES Users(id), "
-                + "FOREIGN KEY (task_id) REFERENCES Tasks(id), "
+                + "user_uuid UUID NOT NULL, "
+                + "task_uuid UUID NOT NULL, "
+                + "FOREIGN KEY (user_uuid) REFERENCES Users(uuid), "
+                + "FOREIGN KEY (task_uuid) REFERENCES Tasks(uuid), "
                 + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
                 + "updated_at TIMESTAMP NULL"
                 + ");"
         };
-        
         
         this.migration = migration;
     }
@@ -72,7 +73,7 @@ public class Migration extends Database {
                 this.connection.commit();
             } catch (SQLException error) {
                 hasError = true;
-                //System.out.println(error.getMessage());
+                System.out.println(error.getMessage());
             }
         }
         if (!hasError) {

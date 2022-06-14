@@ -4,7 +4,9 @@
  */
 package Models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -13,12 +15,12 @@ import java.util.Date;
 public class FeedbackModel {
     private String comment;
     private double score;
-    private int userId;
-    private int taskId;
+    private UUID userUuid;
+    private UUID taskUuid;
     private UserModel user;
     private TaskModel task;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
     public FeedbackModel() { }
     
@@ -30,12 +32,20 @@ public class FeedbackModel {
         this.score = score;
     }
     
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserUuid(String userUuid) {
+        try {
+            this.userUuid = UUID.fromString(userUuid);
+        } catch (Exception error) {
+            this.userUuid = null;
+        }
     }
     
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setTaskUuid(String taskUuid) {
+        try {
+            this.taskUuid = UUID.fromString(taskUuid);
+        } catch (Exception error) {
+            this.taskUuid = null;
+        }
     }
     
     public void setUser(UserModel user) {
@@ -46,11 +56,11 @@ public class FeedbackModel {
         this.task = task;
     }
     
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     
@@ -62,12 +72,12 @@ public class FeedbackModel {
         return this.score;
     }
     
-    public int getUserId() {
-        return this.userId;
+    public UUID getUserId() {
+        return this.userUuid;
     }
     
-    public int getTaskId() {
-        return this.taskId;
+    public UUID getTaskUuid() {
+        return this.taskUuid;
     }
     
     public UserModel getUser() {
@@ -78,11 +88,11 @@ public class FeedbackModel {
         return this.task;
     }
     
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
     
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 }

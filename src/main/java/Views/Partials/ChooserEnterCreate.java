@@ -4,16 +4,20 @@
  */
 package Views.Partials;
 
+import Views.RepublicView;
+
 /**
  *
  * @author gabri
  */
 public class ChooserEnterCreate extends javax.swing.JPanel {
-
+    private RepublicView republicView;
+    
     /**
      * Creates new form ChooserEnterCreate
      */
-    public ChooserEnterCreate() {
+    public ChooserEnterCreate(RepublicView republicView) {
+        this.republicView = republicView;
         initComponents();
     }
 
@@ -26,46 +30,117 @@ public class ChooserEnterCreate extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        createRepublicPanel = new javax.swing.JPanel();
+        createRepublicButton = new javax.swing.JButton();
+        nameRepublicLabel = new javax.swing.JLabel();
+        nameRepublicField = new javax.swing.JTextField();
+        passwordRepublicLabel = new javax.swing.JLabel();
+        passwordRepublicField = new javax.swing.JPasswordField();
+        enterRepublicButton = new javax.swing.JButton();
 
-        jButton1.setText("Criar República");
+        createRepublicPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Criar República"));
 
-        jButton2.setText("Entrar em República");
+        createRepublicButton.setText("Criar República");
+        createRepublicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createRepublicButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Escolha a opção:");
+        nameRepublicLabel.setText("Nome da República:");
+
+        passwordRepublicLabel.setText("Senha da República:");
+
+        enterRepublicButton.setText("Entrar em República");
+        enterRepublicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterRepublicButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout createRepublicPanelLayout = new javax.swing.GroupLayout(createRepublicPanel);
+        createRepublicPanel.setLayout(createRepublicPanelLayout);
+        createRepublicPanelLayout.setHorizontalGroup(
+            createRepublicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createRepublicPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(createRepublicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameRepublicField)
+                    .addComponent(passwordRepublicField)
+                    .addGroup(createRepublicPanelLayout.createSequentialGroup()
+                        .addGroup(createRepublicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameRepublicLabel)
+                            .addComponent(passwordRepublicLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(createRepublicPanelLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addGroup(createRepublicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createRepublicPanelLayout.createSequentialGroup()
+                        .addComponent(enterRepublicButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(createRepublicPanelLayout.createSequentialGroup()
+                        .addComponent(createRepublicButton, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                        .addGap(125, 125, 125))))
+        );
+        createRepublicPanelLayout.setVerticalGroup(
+            createRepublicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createRepublicPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nameRepublicLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameRepublicField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(passwordRepublicLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordRepublicField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(enterRepublicButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(createRepublicButton)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(137, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(createRepublicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(createRepublicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void createRepublicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRepublicButtonActionPerformed
+        String name = this.nameRepublicField.getText().trim();
+        String password = new String(this.passwordRepublicField.getPassword()).trim();
+        
+        this.republicView.createRepublic(name, password);
+    }//GEN-LAST:event_createRepublicButtonActionPerformed
+
+    private void enterRepublicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterRepublicButtonActionPerformed
+        String name = this.nameRepublicField.getText().trim();
+        String password = new String(this.passwordRepublicField.getPassword()).trim();
+        
+        this.republicView.enterInRepublic(name, password);
+    }//GEN-LAST:event_enterRepublicButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton createRepublicButton;
+    private javax.swing.JPanel createRepublicPanel;
+    private javax.swing.JButton enterRepublicButton;
+    private javax.swing.JTextField nameRepublicField;
+    private javax.swing.JLabel nameRepublicLabel;
+    private javax.swing.JPasswordField passwordRepublicField;
+    private javax.swing.JLabel passwordRepublicLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,9 @@
+Controllers\ManagementController.class
+Controllers\ProfileController.class
 Views\Partials\MyTasksPanel.class
 Views\SignInView$1.class
 App.class
+Controllers\TasksController.class
 Controllers\SignInController.class
 Views\Partials\MyProfilePanel.class
 Views\SignUpView.class
@@ -18,6 +21,7 @@ Models\FeedbackModel.class
 Controllers\SignUpController.class
 Views\Partials\TasksRepublicPanel.class
 utils\Migration.class
+Views\Partials\ChooserEnterCreate.class
 Views\Partials\MenuPanel$1.class
 DAO\RepublicDAO.class
 Models\UserModel.class

@@ -4,27 +4,33 @@
  */
 package Models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class UserModel {
-    private int id;
+    private UUID uuid;
     private String username;
     private String password;
-    private int republicId;
+    private UUID republicUuid;
     private RepublicModel republic;
     private ArrayList<TaskModel> tasks;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
     public UserModel() { }
     
-    public void setId(int id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        try {
+            this.uuid = UUID.fromString(uuid);
+        } catch (Exception error) {
+            this.uuid = null;
+        }
     }
     
     public void setUsername(String username) {
@@ -35,8 +41,12 @@ public class UserModel {
         this.password = password;
     }
     
-    public void setRepublicId(int republicId) {
-        this.republicId = republicId;
+    public void setRepublicUuid(String republicUuid) {
+        try {
+            this.republicUuid = UUID.fromString(republicUuid);
+        } catch (Exception error) {
+            this.republicUuid = null;
+        }
     }
     
     public void setRepublic(RepublicModel republic) {
@@ -47,16 +57,16 @@ public class UserModel {
         this.tasks = tasks;
     }
     
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     
-    public int getId() {
-        return this.id;
+    public UUID getUuid() {
+        return this.uuid;
     }
     
     public String getUsername() {
@@ -67,8 +77,8 @@ public class UserModel {
         return this.password;
     }
     
-    public int getRepublicId() {
-        return this.republicId;
+    public UUID getRepublicUuid() {
+        return this.republicUuid;
     }
     
     public RepublicModel getRepublic() {
@@ -79,11 +89,11 @@ public class UserModel {
         return this.tasks;
     }
     
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
     
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 }

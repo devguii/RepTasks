@@ -4,16 +4,20 @@
  */
 package Views.Partials;
 
+import Controllers.ManagementController;
+
 /**
  *
- * @author gabri
+ * @author Gabriel Barbosa Silva 2211114
  */
 public class AdministrationPanel extends javax.swing.JPanel {
-
+    private ManagementController managementController;
+    
     /**
      * Creates new form AdministrationPanel
      */
-    public AdministrationPanel() {
+    public AdministrationPanel(ManagementController managementController) {
+        this.managementController = managementController;
         initComponents();
     }
 
