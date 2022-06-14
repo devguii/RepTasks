@@ -92,7 +92,7 @@ public class RepublicController {
             this.republicView.setRepublic(republic);
             
             this.tasks = this.taskDAO.findAllTasksByRepublicUuid(this.republic.getUuid().toString());
-            this.users = this.userDAO.findAllByRepublicUuid(this.user.getRepublicUuid().toString());
+            this.users = this.userDAO.findAllByRepublicUuid(this.republic.getUuid().toString());
             
             this.republicView.setTasks(tasks);
             this.republicView.setUsers(users);

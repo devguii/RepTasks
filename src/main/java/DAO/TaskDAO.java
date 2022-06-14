@@ -31,18 +31,25 @@ public class TaskDAO extends Database {
             this.resultSet = this.preparedStatement.executeQuery();
 
             while (this.resultSet.next()) {
+                System.out.println(this.resultSet.getTimestamp("updated_at"));
                 TaskModel task = new TaskModel();
                 task.setUuid(this.resultSet.getString("uuid"));
                 task.setTitle(this.resultSet.getString("title"));
                 task.setDescription(this.resultSet.getString("description"));
                 task.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
-                task.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                Timestamp updatedAt = this.resultSet.getTimestamp("updated_at");
+                if (updatedAt != null) {
+                    task.setUpdatedAt(updatedAt.toLocalDateTime());
+                }
+                task.setExpiresAt(this.resultSet.getTimestamp("expires_at").toLocalDateTime());
                 task.setIsDone(this.resultSet.getBoolean("is_done"));
                 task.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 task.setUserUuid(this.resultSet.getString("user_uuid"));
                 tasks.add(task);
+                System.out.println("Chegou!");
             }
         } catch (SQLException error) {
+            System.out.println(error.getMessage());
             this.connection.rollback();
         } finally {
             return tasks;
@@ -65,7 +72,10 @@ public class TaskDAO extends Database {
                 taskModel.setTitle(this.resultSet.getString("title"));
                 taskModel.setDescription(this.resultSet.getString("description"));
                 taskModel.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
-                taskModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                Timestamp updatedAt = this.resultSet.getTimestamp("updated_at");
+                if (updatedAt != null) {
+                    taskModel.setUpdatedAt(updatedAt.toLocalDateTime());
+                }
                 taskModel.setIsDone(this.resultSet.getBoolean("is_done"));
                 taskModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 taskModel.setUserUuid(this.resultSet.getString("user_uuid"));

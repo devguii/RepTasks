@@ -64,7 +64,10 @@ public class UserDAO extends Database {
                 userModel.setPassword(this.resultSet.getString("password"));
                 userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 userModel.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
-                userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                Timestamp updatedAt = this.resultSet.getTimestamp("updated_at");
+                if (updatedAt != null) {
+                    userModel.setUpdatedAt(updatedAt.toLocalDateTime());
+                }
             }
         } catch (SQLException error) {
             JOptionPane.showMessageDialog(null, "Não foi possível encontrar o usuário", "Banco de dados", JOptionPane.ERROR_MESSAGE);
@@ -88,7 +91,10 @@ public class UserDAO extends Database {
                 userModel.setPassword(this.resultSet.getString("password"));
                 userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 userModel.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
-                userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                Timestamp updatedAt = this.resultSet.getTimestamp("updated_at");
+                if (updatedAt != null) {
+                    userModel.setUpdatedAt(updatedAt.toLocalDateTime());
+                }
             }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
@@ -152,7 +158,10 @@ public class UserDAO extends Database {
                 userModel.setPassword(this.resultSet.getString("password"));
                 userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
                 userModel.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
-                userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                Timestamp updatedAt = this.resultSet.getTimestamp("updated_at");
+                if (updatedAt != null) {
+                    userModel.setUpdatedAt(updatedAt.toLocalDateTime());
+                }
                 users.add(userModel);
             }
         } catch (SQLException error) {
