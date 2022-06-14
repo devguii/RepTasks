@@ -27,16 +27,24 @@ public class RepublicView extends javax.swing.JFrame {
     private void initComponents() {
 
         contentPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tasksPanel = new javax.swing.JPanel();
+        scrollPanel = new javax.swing.JScrollPane();
         tasksTable = new javax.swing.JTable();
         openTaskButton = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        searchField = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
+        searchTaskField = new javax.swing.JTextField();
+        searchTaskButton = new javax.swing.JButton();
+        editTaskButton = new javax.swing.JButton();
+        deleteTaskButton = new javax.swing.JButton();
+        usersPanel = new javax.swing.JPanel();
+        scrollPanel2 = new javax.swing.JScrollPane();
+        usersTable = new javax.swing.JTable();
+        openUserButton = new javax.swing.JButton();
+        searchUserField = new javax.swing.JTextField();
+        searchUserButton = new javax.swing.JButton();
+        removeUserButton = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         adminButton = new javax.swing.JButton();
-        tasksRepButton = new javax.swing.JButton();
         myTasksButton = new javax.swing.JButton();
         myProfileButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
@@ -49,25 +57,128 @@ public class RepublicView extends javax.swing.JFrame {
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("República"));
 
-        tasksTable.setBorder(javax.swing.BorderFactory.createTitledBorder("Tarefas"));
+        tasksPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Tarefas"));
+
         tasksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tarefa", "Usuário", "Criação", "Atualização", "Expiração"
+                "Tarefa", "Usuário", "Estado", "Expiração"
             }
         ));
-        jScrollPane1.setViewportView(tasksTable);
+        scrollPanel.setViewportView(tasksTable);
 
+        openTaskButton.setBackground(new java.awt.Color(76, 80, 182));
+        openTaskButton.setForeground(new java.awt.Color(255, 255, 255));
         openTaskButton.setText("Abrir Tarefa");
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        searchTaskButton.setText("Pesquisar");
 
-        searchButton.setText("Pesquisar");
+        editTaskButton.setBackground(new java.awt.Color(176, 180, 82));
+        editTaskButton.setForeground(new java.awt.Color(255, 255, 255));
+        editTaskButton.setText("Editar Tarefa");
+
+        deleteTaskButton.setBackground(new java.awt.Color(176, 80, 82));
+        deleteTaskButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteTaskButton.setText("Deletar Tarefa");
+
+        javax.swing.GroupLayout tasksPanelLayout = new javax.swing.GroupLayout(tasksPanel);
+        tasksPanel.setLayout(tasksPanelLayout);
+        tasksPanelLayout.setHorizontalGroup(
+            tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tasksPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPanel)
+                    .addGroup(tasksPanelLayout.createSequentialGroup()
+                        .addComponent(searchTaskField, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                    .addGroup(tasksPanelLayout.createSequentialGroup()
+                        .addComponent(openTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        tasksPanelLayout.setVerticalGroup(
+            tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tasksPanelLayout.createSequentialGroup()
+                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchTaskField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTaskButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(openTaskButton)
+                    .addComponent(editTaskButton)
+                    .addComponent(deleteTaskButton))
+                .addContainerGap())
+        );
+
+        usersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuários"));
+
+        usersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Tarefa", "Usuário", "Estado", "Expiração"
+            }
+        ));
+        scrollPanel2.setViewportView(usersTable);
+
+        openUserButton.setBackground(new java.awt.Color(76, 80, 182));
+        openUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        openUserButton.setText("Abrir Usuário");
+
+        searchUserButton.setText("Pesquisar");
+
+        removeUserButton.setBackground(new java.awt.Color(176, 80, 82));
+        removeUserButton.setForeground(new java.awt.Color(255, 255, 255));
+        removeUserButton.setText("Remover Usuário");
+
+        javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
+        usersPanel.setLayout(usersPanelLayout);
+        usersPanelLayout.setHorizontalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(usersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPanel2)
+                    .addGroup(usersPanelLayout.createSequentialGroup()
+                        .addComponent(searchUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                    .addGroup(usersPanelLayout.createSequentialGroup()
+                        .addComponent(openUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        usersPanelLayout.setVerticalGroup(
+            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(usersPanelLayout.createSequentialGroup()
+                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchUserField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(openUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeUserButton))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -76,32 +187,16 @@ public class RepublicView extends javax.swing.JFrame {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(openTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
+                    .addComponent(tasksPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contentPanelLayout.createSequentialGroup()
-                                .addComponent(openTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(searchField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(searchButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addComponent(tasksPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -112,8 +207,6 @@ public class RepublicView extends javax.swing.JFrame {
         logoLabel.setText("REPTASKS");
 
         adminButton.setText("Administrar República");
-
-        tasksRepButton.setText("Tarefas da República");
 
         myTasksButton.setText("Minhas Tarefas");
 
@@ -130,7 +223,7 @@ public class RepublicView extends javax.swing.JFrame {
         tasksDoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tasksDoneLabel.setText("Tarefas: [x / x]");
 
-        republicButton.setText("Usuários da República");
+        republicButton.setText("República");
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -142,7 +235,6 @@ public class RepublicView extends javax.swing.JFrame {
                     .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(adminButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tasksRepButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,12 +259,10 @@ public class RepublicView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(republicButton)
                 .addGap(18, 18, 18)
-                .addComponent(tasksRepButton)
-                .addGap(18, 18, 18)
                 .addComponent(myTasksButton)
                 .addGap(18, 18, 18)
                 .addComponent(adminButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addContainerGap())
         );
@@ -239,21 +329,29 @@ public class RepublicView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminButton;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton deleteTaskButton;
+    private javax.swing.JButton editTaskButton;
     private javax.swing.JLabel isLoggedInLabel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton myProfileButton;
     private javax.swing.JButton myTasksButton;
     private javax.swing.JButton openTaskButton;
+    private javax.swing.JButton openUserButton;
+    private javax.swing.JButton removeUserButton;
     private javax.swing.JButton republicButton;
     private javax.swing.JLabel scoreLabel;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JTextField searchField;
+    private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JScrollPane scrollPanel2;
+    private javax.swing.JButton searchTaskButton;
+    private javax.swing.JTextField searchTaskField;
+    private javax.swing.JButton searchUserButton;
+    private javax.swing.JTextField searchUserField;
     private javax.swing.JLabel tasksDoneLabel;
-    private javax.swing.JButton tasksRepButton;
+    private javax.swing.JPanel tasksPanel;
     private javax.swing.JTable tasksTable;
+    private javax.swing.JPanel usersPanel;
+    private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 }

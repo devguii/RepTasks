@@ -8,12 +8,12 @@ package Views;
  *
  * @author gabri
  */
-public class MyTasksView extends javax.swing.JFrame {
+public class UserView extends javax.swing.JFrame {
 
     /**
-     * Creates new form MyTasksView
+     * Creates new form UserView
      */
-    public MyTasksView() {
+    public UserView() {
         initComponents();
     }
 
@@ -26,12 +26,15 @@ public class MyTasksView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contentPanel = new javax.swing.JPanel();
-        scrollPanel = new javax.swing.JScrollPane();
-        tasksTable = new javax.swing.JTable();
-        openTaskButton = new javax.swing.JButton();
-        searchField = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
+        ContentPanel = new javax.swing.JPanel();
+        republicLabel2 = new javax.swing.JLabel();
+        outRepublicButton2 = new javax.swing.JButton();
+        feedbackPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        feedbacksTable2 = new javax.swing.JTable();
+        viewFeedbackButton2 = new javax.swing.JButton();
+        nameLabel = new javax.swing.JLabel();
+        userScoreLabel = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         adminButton = new javax.swing.JButton();
@@ -45,9 +48,17 @@ public class MyTasksView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Minhas Tarefas"));
+        ContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Perfil"));
 
-        tasksTable.setModel(new javax.swing.table.DefaultTableModel(
+        republicLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        republicLabel2.setText("República");
+
+        outRepublicButton2.setBackground(new java.awt.Color(176, 80, 82));
+        outRepublicButton2.setText("Remover da República");
+
+        feedbackPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Feedbacks"));
+
+        feedbacksTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,43 +66,73 @@ public class MyTasksView extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Tarefa", "Usuário", "Estado", "Expiração"
+                "Tarefa", "Usuário", "Score", "Criação"
             }
         ));
-        scrollPanel.setViewportView(tasksTable);
+        jScrollPane3.setViewportView(feedbacksTable2);
 
-        openTaskButton.setText("Abrir Tarefa");
+        viewFeedbackButton2.setBackground(new java.awt.Color(76, 80, 182));
+        viewFeedbackButton2.setForeground(new java.awt.Color(255, 255, 255));
+        viewFeedbackButton2.setText("Visualizar Feedback");
 
-        searchButton.setText("Pesquisar");
-
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout feedbackPanel2Layout = new javax.swing.GroupLayout(feedbackPanel2);
+        feedbackPanel2.setLayout(feedbackPanel2Layout);
+        feedbackPanel2Layout.setHorizontalGroup(
+            feedbackPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(feedbackPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPanel)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(openTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(feedbackPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addGroup(feedbackPanel2Layout.createSequentialGroup()
+                        .addComponent(viewFeedbackButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+        feedbackPanel2Layout.setVerticalGroup(
+            feedbackPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(feedbackPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(openTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(searchField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(searchButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewFeedbackButton2)
+                .addContainerGap())
+        );
+
+        nameLabel.setText("Nome");
+        nameLabel.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
+
+        userScoreLabel.setText("Score");
+        userScoreLabel.setBorder(javax.swing.BorderFactory.createTitledBorder("Score"));
+
+        javax.swing.GroupLayout ContentPanelLayout = new javax.swing.GroupLayout(ContentPanel);
+        ContentPanel.setLayout(ContentPanelLayout);
+        ContentPanelLayout.setHorizontalGroup(
+            ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userScoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(feedbackPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(ContentPanelLayout.createSequentialGroup()
+                        .addComponent(republicLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(outRepublicButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        ContentPanelLayout.setVerticalGroup(
+            ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ContentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nameLabel)
+                .addGap(18, 18, 18)
+                .addGroup(ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(republicLabel2)
+                    .addComponent(outRepublicButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userScoreLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(feedbackPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -157,7 +198,7 @@ public class MyTasksView extends javax.swing.JFrame {
                 .addComponent(myTasksButton)
                 .addGap(18, 18, 18)
                 .addComponent(adminButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addContainerGap())
         );
@@ -170,7 +211,7 @@ public class MyTasksView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,7 +220,7 @@ public class MyTasksView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -203,40 +244,43 @@ public class MyTasksView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MyTasksView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MyTasksView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MyTasksView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MyTasksView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MyTasksView().setVisible(true);
+                new UserView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContentPanel;
     private javax.swing.JButton adminButton;
-    private javax.swing.JPanel contentPanel;
+    private javax.swing.JPanel feedbackPanel2;
+    private javax.swing.JTable feedbacksTable2;
     private javax.swing.JLabel isLoggedInLabel;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton myProfileButton;
     private javax.swing.JButton myTasksButton;
-    private javax.swing.JButton openTaskButton;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JButton outRepublicButton2;
     private javax.swing.JButton republicButton;
+    private javax.swing.JLabel republicLabel2;
     private javax.swing.JLabel scoreLabel;
-    private javax.swing.JScrollPane scrollPanel;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JTextField searchField;
     private javax.swing.JLabel tasksDoneLabel;
-    private javax.swing.JTable tasksTable;
+    private javax.swing.JLabel userScoreLabel;
+    private javax.swing.JButton viewFeedbackButton2;
     // End of variables declaration//GEN-END:variables
 }
