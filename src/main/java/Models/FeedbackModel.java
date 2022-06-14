@@ -4,6 +4,7 @@
  */
 package Models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,8 +19,8 @@ public class FeedbackModel {
     private UUID taskUuid;
     private UserModel user;
     private TaskModel task;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
     public FeedbackModel() { }
     
@@ -55,11 +56,11 @@ public class FeedbackModel {
         this.task = task;
     }
     
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     
@@ -87,11 +88,11 @@ public class FeedbackModel {
         return this.task;
     }
     
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
     
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 }

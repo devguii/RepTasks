@@ -5,17 +5,23 @@
 package Controllers;
 
 import Views.Partials.AdministrationPanel;
+import Views.RepublicView;
 
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class ManagementController {
-    private RepublicController republicController;
+    private RepublicView republicView;
     private AdministrationPanel adminPanel;
     
-    public ManagementController(RepublicController republicController) {
-        this.republicController = republicController;
+    public ManagementController(RepublicView republicView) {
+        this.republicView = republicView;
         this.adminPanel = new AdministrationPanel(this);
+        this.adminPanel.setVisible(false);
+    }
+    
+    public AdministrationPanel getPanel() {
+        return this.adminPanel;
     }
 }

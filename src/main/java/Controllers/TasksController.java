@@ -4,14 +4,24 @@
  */
 package Controllers;
 
+import Views.Partials.TasksRepublicPanel;
+import Views.RepublicView;
+
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class TasksController {
-    private RepublicController republicController;
+    private RepublicView republicView;
+    private TasksRepublicPanel tasksRepublicPanel;
     
-    public TasksController(RepublicController republicController) {
-        this.republicController = republicController;
+    public TasksController(RepublicView republicView) {
+        this.republicView = republicView;
+        this.tasksRepublicPanel = new TasksRepublicPanel(this);
+        this.tasksRepublicPanel.setVisible(false);
+    }
+    
+    public TasksRepublicPanel getPanel() {
+        return this.tasksRepublicPanel;
     }
 }

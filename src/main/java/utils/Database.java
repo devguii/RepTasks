@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author Gabriel Barbosa Silva 2211114
  */
 public class Database {
-    protected Connection connection = null;
+    protected static Connection connection = null;
     protected PreparedStatement preparedStatement = null;
     protected ResultSet resultSet = null;
     protected DatabaseMetaData metaData = null;

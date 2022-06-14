@@ -4,14 +4,24 @@
  */
 package Controllers;
 
+import Views.Partials.MyProfilePanel;
+import Views.RepublicView;
+
 /**
  *
  * @author Gabriel Barbosa Silva 2211114
  */
 public class ProfileController {
-    private RepublicController republicController;
+    private RepublicView republicView;
+    private MyProfilePanel myProfilePanel;
     
-    public ProfileController(RepublicController republicController) {
-        this.republicController = republicController;
+    public ProfileController(RepublicView republicView) {
+        this.republicView = republicView;
+        this.myProfilePanel = new MyProfilePanel(this);
+        this.myProfilePanel.setVisible(false);
+    }
+    
+    public MyProfilePanel getPanel() {
+        return this.myProfilePanel;
     }
 }

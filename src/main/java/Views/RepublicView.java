@@ -8,10 +8,13 @@ import Controllers.ManagementController;
 import Controllers.ProfileController;
 import Controllers.RepublicController;
 import Controllers.TasksController;
+import Models.FeedbackModel;
+import Models.RepublicModel;
 import Models.UserModel;
 import Views.Partials.AdministrationPanel;
 import Views.Partials.ChooserEnterCreate;
 import Views.Partials.MenuPanel;
+import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 
@@ -21,18 +24,43 @@ import javax.swing.JPanel;
  */
 public class RepublicView extends javax.swing.JFrame {
     private UserModel user;
+    private ArrayList<FeedbackModel> feedbacks;
+    private RepublicModel republic;
     private RepublicController republicController;
+    private ChooserEnterCreate chooserEnterCreate;
+    private ProfileController profileController;
+    private TasksController tasksController;
+    private ManagementController managementController;
     
     public void setUser(UserModel user) {
         this.user = user;
         this.menuPanel1.setUser(this.user);
     }
     
+    public void setFeedbacks(ArrayList<FeedbackModel> feedbacks) {
+        this.feedbacks = feedbacks;
+        this.menuPanel1.setFeedbacks(this.feedbacks);
+    }
+    
     public UserModel getUser() {
         return this.user;
     }
     
-    public void switchPanel(JPanel panel) {
+    public void setRepublic(RepublicModel republic) {
+        this.republic = republic;
+    }
+    
+    public RepublicModel getRepublic() {
+        return this.republic;
+    }
+    
+    public void viewTasksView() {
+        JPanel panel = this.tasksController.getPanel();
+        panel.setVisible(true);
+        this.switchContentPanel(panel);
+    }
+    
+    public void switchContentPanel(JPanel panel) {
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
 
@@ -44,7 +72,7 @@ public class RepublicView extends javax.swing.JFrame {
                 .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        
+
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -54,15 +82,27 @@ public class RepublicView extends javax.swing.JFrame {
         this.repaint();
     }
     
+    public void enterInRepublic(String name, String password) {
+        this.republicController.create(name, password);
+    }
+    
+    public void createRepublic(String name, String password) {
+        this.republicController.create(name, password);
+    }
+    
     public void viewContentPanel() {
-        if (this.user.getRepublicUuid() != null) {
-            System.out.println("Republic Id is not null");
-        } else {
-            ChooserEnterCreate chooser = new ChooserEnterCreate();
-            chooser.setVisible(true);
-            this.switchPanel(chooser);
+        if (this.user.getRepublicUuid() == null) {
+            this.chooserEnterCreate.setVisible(true);
+            this.switchContentPanel(this.chooserEnterCreate);
             this.menuPanel1.setChooserEnterCreateMenu();
+            return;
         }
+        
+        if (!this.user.getUuid().equals(this.republic.getUserUuid())) {
+            this.menuPanel1.setUserMenu();
+        }
+        
+        this.viewTasksView();
     }
     
     /**
@@ -70,6 +110,11 @@ public class RepublicView extends javax.swing.JFrame {
      */
     public RepublicView(RepublicController republicController) {
         this.republicController = republicController;
+        this.chooserEnterCreate = new ChooserEnterCreate(this);
+        this.chooserEnterCreate.setVisible(false);
+        this.profileController = new ProfileController(this);
+        this.managementController = new ManagementController(this);
+        this.tasksController = new TasksController(this);
         initComponents();
         this.menuPanel1.setRepublicView(this);
     }

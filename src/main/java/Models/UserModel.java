@@ -4,6 +4,7 @@
  */
 package Models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -19,8 +20,8 @@ public class UserModel {
     private UUID republicUuid;
     private RepublicModel republic;
     private ArrayList<TaskModel> tasks;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
     public UserModel() { }
     
@@ -56,11 +57,11 @@ public class UserModel {
         this.tasks = tasks;
     }
     
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     
@@ -88,11 +89,11 @@ public class UserModel {
         return this.tasks;
     }
     
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
     
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 }
