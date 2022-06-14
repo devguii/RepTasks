@@ -184,6 +184,7 @@ public class RepublicController {
         task.setTitle(title);
         task.setDescription(description);
         task.setUserUuid(userUuid);
+        task.setRepublicUuid(this.republic.getUuid().toString());
         task.setExpiresAt(expiresAt);
         
         if (!expiresAt.isAfter(LocalDateTime.now())) {

@@ -51,6 +51,7 @@ public class RepublicView extends javax.swing.JFrame {
 
     public void load() {
         DefaultTableModel taskTableModel = (DefaultTableModel) this.tasksTable.getModel();
+        taskTableModel.setRowCount(0);
         for (TaskModel taskModel : this.tasksModel) {
             Object[] row = {
                 taskModel.getTitle(), taskModel.getUserUuid(), taskModel.getIsDone(), taskModel.getExpiresAt(), taskModel.getUuid().toString(),
@@ -59,6 +60,7 @@ public class RepublicView extends javax.swing.JFrame {
         }
         
         DefaultTableModel userTableModel = (DefaultTableModel) this.usersTable.getModel();
+        userTableModel.setRowCount(0);
         for (UserModel userModel : this.usersModel) {
             String cargo = "Usuário";
             
