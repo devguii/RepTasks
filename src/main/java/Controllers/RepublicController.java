@@ -32,6 +32,8 @@ public class RepublicController {
     private RepublicModel republic;
     private ArrayList<TaskModel> tasks;
     private ArrayList<UserModel> users;
+    private MyProfileController myProfileController;
+    private MyTasksController myTasksController;
     
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
@@ -47,6 +49,8 @@ public class RepublicController {
         this.republicDAO = new RepublicDAO();
         this.userDAO = new UserDAO();
         this.taskDAO = new TaskDAO();
+        this.myProfileController = new MyProfileController(this);
+        this.myTasksController = new MyTasksController(this);
     }
     
     public void view() {
@@ -65,6 +69,7 @@ public class RepublicController {
             this.republic = this.republicDAO.findByUuid(this.user.getRepublicUuid().toString());
             
             if (this.republic == null) {
+                System.out.println("Republic is null - load()");
                 return;
             }
             
@@ -75,6 +80,8 @@ public class RepublicController {
             
             this.republicView.setTasks(tasks);
             this.republicView.setUsers(users);
+            
+            this.republicView.load();
         } else {
             this.signInController.view();
             this.close();
@@ -115,5 +122,9 @@ public class RepublicController {
         
         JOptionPane.showMessageDialog(null, "Não foi possível criar a república!", "República", JOptionPane.ERROR_MESSAGE);
         return;
+    }
+    
+    public void userView(String uuidUser) {
+        
     }
 }

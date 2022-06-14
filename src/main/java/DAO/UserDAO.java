@@ -92,7 +92,7 @@ public class UserDAO extends Database {
             }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
-            JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário44!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
         } finally {
             return userModel;
         }
@@ -128,7 +128,7 @@ public class UserDAO extends Database {
             }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
-            JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário22!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
         } finally {
             return userModel;
         }

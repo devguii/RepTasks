@@ -19,6 +19,7 @@ public class Migration extends Database {
             "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";",
             "CREATE TABLE IF NOT EXISTS public.Users("
                 + "uuid UUID NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(), "
+                + "name VARCHAR(255) NOT NULL, "
                 + "username VARCHAR(255) NOT NULL UNIQUE, "
                 + "password VARCHAR(255) NOT NULL, "
                 + "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "

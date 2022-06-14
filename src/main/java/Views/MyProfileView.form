@@ -325,6 +325,7 @@
         <Component class="javax.swing.JButton" name="myProfileButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Meu Perfil"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="logoutButton">

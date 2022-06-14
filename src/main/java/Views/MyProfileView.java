@@ -170,6 +170,7 @@ public class MyProfileView extends javax.swing.JFrame {
         myTasksButton.setText("Minhas Tarefas");
 
         myProfileButton.setText("Meu Perfil");
+        myProfileButton.setEnabled(false);
 
         logoutButton.setText("Sair");
 

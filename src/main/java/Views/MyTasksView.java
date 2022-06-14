@@ -102,6 +102,7 @@ public class MyTasksView extends javax.swing.JFrame {
         logoLabel.setText("REPTASKS");
 
         myTasksButton.setText("Minhas Tarefas");
+        myTasksButton.setEnabled(false);
 
         myProfileButton.setText("Meu Perfil");
 

@@ -42,19 +42,8 @@ public class TaskView extends javax.swing.JFrame {
         scrollPanel2 = new javax.swing.JScrollPane();
         commentArea = new javax.swing.JTextArea();
         editFeedbackButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
-        alterTaskButton = new javax.swing.JButton();
-        menuPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        republicButton = new javax.swing.JButton();
-        myTasksButton = new javax.swing.JButton();
-        myProfileButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
-        isLoggedInLabel = new javax.swing.JLabel();
-        scoreLabel = new javax.swing.JLabel();
-        tasksDoneLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Tarefa"));
@@ -130,13 +119,6 @@ public class TaskView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        deleteButton.setBackground(new java.awt.Color(176, 80, 82));
-        deleteButton.setText("Deletar Tarefa");
-
-        alterTaskButton.setBackground(new java.awt.Color(176, 180, 82));
-        alterTaskButton.setForeground(new java.awt.Color(255, 255, 255));
-        alterTaskButton.setText("Alterar Tarefa");
-
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -158,10 +140,7 @@ public class TaskView extends javax.swing.JFrame {
                     .addComponent(separator2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                         .addComponent(doneTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(alterTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -179,76 +158,11 @@ public class TaskView extends javax.swing.JFrame {
                     .addComponent(createdLabel)
                     .addComponent(updatedLabel))
                 .addGap(18, 18, 18)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doneTaskButton)
-                    .addComponent(deleteButton)
-                    .addComponent(alterTaskButton))
+                .addComponent(doneTaskButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        menuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
-
-        logoLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("REPTASKS");
-
-        republicButton.setText("República");
-
-        myTasksButton.setText("Minhas Tarefas");
-
-        myProfileButton.setText("Meu Perfil");
-
-        logoutButton.setText("Sair");
-
-        isLoggedInLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        isLoggedInLabel.setText("Usuário");
-
-        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scoreLabel.setText("Score: x.xx");
-
-        tasksDoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tasksDoneLabel.setText("Tarefas: [x / x]");
-
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(republicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tasksDoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(isLoggedInLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scoreLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tasksDoneLabel)
-                .addGap(24, 24, 24)
-                .addComponent(myProfileButton)
-                .addGap(18, 18, 18)
-                .addComponent(republicButton)
-                .addGap(18, 18, 18)
-                .addComponent(myTasksButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoutButton)
                 .addContainerGap())
         );
 
@@ -258,8 +172,6 @@ public class TaskView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -267,9 +179,7 @@ public class TaskView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -277,30 +187,19 @@ public class TaskView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton alterTaskButton;
     private javax.swing.JTextArea commentArea;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel createdLabel;
-    private javax.swing.JButton deleteButton;
     private javax.swing.JTextPane descriptionPanel;
     private javax.swing.JButton doneTaskButton;
     private javax.swing.JButton editFeedbackButton;
     private javax.swing.JLabel expiresLabel;
     private javax.swing.JPanel feedbackPanel;
-    private javax.swing.JLabel isLoggedInLabel;
-    private javax.swing.JLabel logoLabel;
-    private javax.swing.JButton logoutButton;
-    private javax.swing.JPanel menuPanel;
-    private javax.swing.JButton myProfileButton;
-    private javax.swing.JButton myTasksButton;
-    private javax.swing.JButton republicButton;
-    private javax.swing.JLabel scoreLabel;
     private javax.swing.JSpinner scoreSpinner;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JScrollPane scrollPanel2;
     private javax.swing.JButton sendFeedbackButton;
     private javax.swing.JSeparator separator2;
-    private javax.swing.JLabel tasksDoneLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel updatedLabel;
     private javax.swing.JLabel userOwnerLabel;

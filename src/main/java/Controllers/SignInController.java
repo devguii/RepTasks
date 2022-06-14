@@ -66,6 +66,8 @@ public class SignInController {
         this.close();
         this.republicController.setUserUuid(user.getUuid().toString());
         this.republicController.view();
+        this.republicController.setUserUuid(user.getUuid().toString());
+        this.republicController.load();
         return;
     }
 }

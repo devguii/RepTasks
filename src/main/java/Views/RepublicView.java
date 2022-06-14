@@ -9,6 +9,7 @@ import Models.RepublicModel;
 import Models.TaskModel;
 import Models.UserModel;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,7 +43,7 @@ public class RepublicView extends javax.swing.JFrame {
         DefaultTableModel taskTableModel = (DefaultTableModel) this.tasksTable.getModel();
         for (TaskModel taskModel : this.tasksModel) {
             Object[] row = {
-                taskModel.getTitle(), taskModel.getUserUuid(), taskModel.getIsDone(), taskModel.getExpiresAt(),
+                taskModel.getTitle(), taskModel.getUserUuid(), taskModel.getIsDone(), taskModel.getExpiresAt(), taskModel.getUuid().toString(),
             };
             taskTableModel.addRow(row);
         }
@@ -56,7 +57,7 @@ public class RepublicView extends javax.swing.JFrame {
             }
             
             Object[] row = {
-                userModel.getName(), cargo,
+                userModel.getName(), cargo, userModel.getUuid().toString(),
             };
             userTableModel.addRow(row);
         }
@@ -89,6 +90,7 @@ public class RepublicView extends javax.swing.JFrame {
         searchTaskButton = new javax.swing.JButton();
         editTaskButton = new javax.swing.JButton();
         deleteTaskButton = new javax.swing.JButton();
+        addTaskButton = new javax.swing.JButton();
         usersPanel = new javax.swing.JPanel();
         scrollPanel2 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
@@ -117,20 +119,36 @@ public class RepublicView extends javax.swing.JFrame {
 
         tasksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Tarefa", "Usuário", "Estado", "Expiração"
+                "Tarefa", "Usuário", "Estado", "Expiração", ""
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tasksTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scrollPanel.setViewportView(tasksTable);
+        if (tasksTable.getColumnModel().getColumnCount() > 0) {
+            tasksTable.getColumnModel().getColumn(4).setMinWidth(0);
+            tasksTable.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tasksTable.getColumnModel().getColumn(4).setMaxWidth(0);
+        }
 
         openTaskButton.setBackground(new java.awt.Color(76, 80, 182));
         openTaskButton.setForeground(new java.awt.Color(255, 255, 255));
         openTaskButton.setText("Abrir Tarefa");
+        openTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openTaskButtonActionPerformed(evt);
+            }
+        });
 
         searchTaskField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +166,10 @@ public class RepublicView extends javax.swing.JFrame {
         deleteTaskButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteTaskButton.setText("Deletar Tarefa");
 
+        addTaskButton.setBackground(new java.awt.Color(76, 180, 82));
+        addTaskButton.setForeground(new java.awt.Color(255, 255, 255));
+        addTaskButton.setText("Adicionar Tarefa");
+
         javax.swing.GroupLayout tasksPanelLayout = new javax.swing.GroupLayout(tasksPanel);
         tasksPanel.setLayout(tasksPanelLayout);
         tasksPanelLayout.setHorizontalGroup(
@@ -157,11 +179,13 @@ public class RepublicView extends javax.swing.JFrame {
                 .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollPanel)
                     .addGroup(tasksPanelLayout.createSequentialGroup()
-                        .addComponent(openTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(editTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(openTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editTaskButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteTaskButton))
                     .addGroup(tasksPanelLayout.createSequentialGroup()
                         .addComponent(searchTaskField, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,7 +205,8 @@ public class RepublicView extends javax.swing.JFrame {
                 .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(openTaskButton)
                     .addComponent(editTaskButton)
-                    .addComponent(deleteTaskButton))
+                    .addComponent(deleteTaskButton)
+                    .addComponent(addTaskButton))
                 .addContainerGap())
         );
 
@@ -189,20 +214,36 @@ public class RepublicView extends javax.swing.JFrame {
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Usuário", "Cargo"
+                "Usuário", "Cargo", ""
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        usersTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scrollPanel2.setViewportView(usersTable);
+        if (usersTable.getColumnModel().getColumnCount() > 0) {
+            usersTable.getColumnModel().getColumn(2).setMinWidth(0);
+            usersTable.getColumnModel().getColumn(2).setPreferredWidth(0);
+            usersTable.getColumnModel().getColumn(2).setMaxWidth(0);
+        }
 
         openUserButton.setBackground(new java.awt.Color(76, 80, 182));
         openUserButton.setForeground(new java.awt.Color(255, 255, 255));
         openUserButton.setText("Abrir Usuário");
+        openUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openUserButtonActionPerformed(evt);
+            }
+        });
 
         searchUserButton.setText("Pesquisar");
 
@@ -223,10 +264,9 @@ public class RepublicView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(searchUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                     .addGroup(usersPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(openUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(removeUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(openUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeUserButton)))
                 .addContainerGap())
         );
         usersPanelLayout.setVerticalGroup(
@@ -304,6 +344,12 @@ public class RepublicView extends javax.swing.JFrame {
         tasksDoneLabel.setText("Tarefas: [x / x]");
 
         republicButton.setText("República");
+        republicButton.setEnabled(false);
+        republicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                republicButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -372,7 +418,38 @@ public class RepublicView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTaskFieldActionPerformed
 
+    private void openTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openTaskButtonActionPerformed
+        //get selected row
+        int selectedRow = this.tasksTable.getSelectedRow();
+        if(selectedRow >= 0) {
+            try {
+                String uuidTask = (String) this.tasksTable.getValueAt(selectedRow, 4);
+                System.out.println(uuidTask);
+            } catch (Exception error) {
+                JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar a tarefa!", "Tarefa", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        //this.republicController.openTask();
+    }//GEN-LAST:event_openTaskButtonActionPerformed
+
+    private void openUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openUserButtonActionPerformed
+        int selectedRow = this.usersTable.getSelectedRow();
+        if(selectedRow >= 0) {
+            try {
+                String uuidUser = (String) this.usersTable.getValueAt(selectedRow, 2);
+                this.republicController.userView(uuidUser);
+            } catch (Exception error) {
+                JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar o usuário!", "Usuário", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_openUserButtonActionPerformed
+
+    private void republicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_republicButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_republicButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addTaskButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton deleteTaskButton;
     private javax.swing.JButton editTaskButton;

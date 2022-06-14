@@ -35,17 +35,8 @@ public class UserView extends javax.swing.JFrame {
         viewFeedbackButton2 = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         userScoreLabel = new javax.swing.JLabel();
-        menuPanel = new javax.swing.JPanel();
-        logoLabel = new javax.swing.JLabel();
-        myTasksButton = new javax.swing.JButton();
-        myProfileButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
-        isLoggedInLabel = new javax.swing.JLabel();
-        scoreLabel = new javax.swing.JLabel();
-        tasksDoneLabel = new javax.swing.JLabel();
-        republicButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         ContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Perfil"));
@@ -92,7 +83,7 @@ public class UserView extends javax.swing.JFrame {
             feedbackPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(feedbackPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewFeedbackButton2)
                 .addContainerGap())
@@ -136,76 +127,12 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        menuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
-
-        logoLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("REPTASKS");
-
-        myTasksButton.setText("Minhas Tarefas");
-
-        myProfileButton.setText("Meu Perfil");
-
-        logoutButton.setText("Sair");
-
-        isLoggedInLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        isLoggedInLabel.setText("Usuário");
-
-        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scoreLabel.setText("Score: x.xx");
-
-        tasksDoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tasksDoneLabel.setText("Tarefas: [x / x]");
-
-        republicButton.setText("República");
-
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(myTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tasksDoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(republicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(isLoggedInLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scoreLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tasksDoneLabel)
-                .addGap(24, 24, 24)
-                .addComponent(myProfileButton)
-                .addGap(18, 18, 18)
-                .addComponent(republicButton)
-                .addGap(18, 18, 18)
-                .addComponent(myTasksButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
-                .addComponent(logoutButton)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -213,9 +140,7 @@ public class UserView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -226,19 +151,10 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JPanel ContentPanel;
     private javax.swing.JPanel feedbackPanel2;
     private javax.swing.JTable feedbacksTable2;
-    private javax.swing.JLabel isLoggedInLabel;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel logoLabel;
-    private javax.swing.JButton logoutButton;
-    private javax.swing.JPanel menuPanel;
-    private javax.swing.JButton myProfileButton;
-    private javax.swing.JButton myTasksButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton outRepublicButton2;
-    private javax.swing.JButton republicButton;
     private javax.swing.JLabel republicLabel2;
-    private javax.swing.JLabel scoreLabel;
-    private javax.swing.JLabel tasksDoneLabel;
     private javax.swing.JLabel userScoreLabel;
     private javax.swing.JButton viewFeedbackButton2;
     // End of variables declaration//GEN-END:variables
