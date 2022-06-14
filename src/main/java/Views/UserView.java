@@ -4,16 +4,20 @@
  */
 package Views;
 
+import Controllers.RepublicController;
+
 /**
  *
  * @author gabri
  */
 public class UserView extends javax.swing.JFrame {
-
+    private RepublicController republicController;
+    
     /**
      * Creates new form UserView
      */
-    public UserView() {
+    public UserView(RepublicController republicController) {
+        this.republicController = republicController;
         initComponents();
     }
 

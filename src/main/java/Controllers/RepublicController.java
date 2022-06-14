@@ -4,13 +4,17 @@
  */
 package Controllers;
 
+import DAO.FeedbackDAO;
 import DAO.RepublicDAO;
 import DAO.TaskDAO;
 import DAO.UserDAO;
+import Models.FeedbackModel;
 import Models.RepublicModel;
 import Models.TaskModel;
 import Models.UserModel;
 import Views.RepublicView;
+import Views.TaskView;
+import Views.UserView;
 import com.password4j.Hash;
 import com.password4j.Password;
 import java.util.ArrayList;
@@ -34,6 +38,9 @@ public class RepublicController {
     private ArrayList<UserModel> users;
     private MyProfileController myProfileController;
     private MyTasksController myTasksController;
+    private TaskView taskView;
+    private UserView userView;
+    private FeedbackDAO feedbackDAO;
     
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
@@ -51,6 +58,9 @@ public class RepublicController {
         this.taskDAO = new TaskDAO();
         this.myProfileController = new MyProfileController(this);
         this.myTasksController = new MyTasksController(this);
+        this.taskView = new TaskView(this);
+        this.userView = new UserView(this);
+        this.feedbackDAO = new FeedbackDAO();
     }
     
     public void view() {
@@ -124,7 +134,23 @@ public class RepublicController {
         return;
     }
     
-    public void userView(String uuidUser) {
+    public void openUserView(String uuidUser) {
         
+    }
+    
+    public void openTaskView(String uuidTask) {
+        TaskModel task = this.taskDAO.findByUuid(uuidTask);
+        FeedbackModel feedback = this.feedbackDAO.findByTaskUuidAndUserUuid(uuidTask, this.userUuid);
+        
+        if (task == null) {
+            JOptionPane.showMessageDialog(null, "Tarefa inexistente!", "República", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.taskView.setTaskModel(task);
+        this.taskView.setUserModel(this.user);
+        this.taskView.setFeedbackModel(feedback);
+        this.taskView.load();
+        this.taskView.setVisible(true);
     }
 }

@@ -419,12 +419,11 @@ public class RepublicView extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTaskFieldActionPerformed
 
     private void openTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openTaskButtonActionPerformed
-        //get selected row
         int selectedRow = this.tasksTable.getSelectedRow();
         if(selectedRow >= 0) {
             try {
                 String uuidTask = (String) this.tasksTable.getValueAt(selectedRow, 4);
-                System.out.println(uuidTask);
+                this.republicController.openTaskView(uuidTask);
             } catch (Exception error) {
                 JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar a tarefa!", "Tarefa", JOptionPane.ERROR_MESSAGE);
             }
@@ -437,7 +436,7 @@ public class RepublicView extends javax.swing.JFrame {
         if(selectedRow >= 0) {
             try {
                 String uuidUser = (String) this.usersTable.getValueAt(selectedRow, 2);
-                this.republicController.userView(uuidUser);
+                this.republicController.openUserView(uuidUser);
             } catch (Exception error) {
                 JOptionPane.showMessageDialog(null, "Houve um erro ao selecionar o usuário!", "Usuário", JOptionPane.ERROR_MESSAGE);
             }

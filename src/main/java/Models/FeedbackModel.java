@@ -13,6 +13,7 @@ import java.util.UUID;
  * @author Gabriel Barbosa Silva 2211114
  */
 public class FeedbackModel {
+    private UUID uuid;
     private String comment;
     private double score;
     private UUID userUuid;
@@ -23,6 +24,14 @@ public class FeedbackModel {
     private LocalDateTime updatedAt;
     
     public FeedbackModel() { }
+    
+    public void setUuid(String uuid) {
+        try {
+            this.uuid = UUID.fromString(uuid);
+        } catch (Exception error) {
+            this.uuid = null;
+        }
+    }
     
     public void setComment(String comment) {
         this.comment = comment;
@@ -64,6 +73,10 @@ public class FeedbackModel {
         this.updatedAt = updatedAt;
     }
     
+    public UUID getUuid() {
+        return this.uuid;
+    }
+    
     public String getComment() {
         return this.comment;
     }
@@ -72,7 +85,7 @@ public class FeedbackModel {
         return this.score;
     }
     
-    public UUID getUserId() {
+    public UUID getUserUuid() {
         return this.userUuid;
     }
     

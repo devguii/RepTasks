@@ -4,16 +4,54 @@
  */
 package Views;
 
+import Controllers.RepublicController;
+import Models.FeedbackModel;
+import Models.TaskModel;
+import Models.UserModel;
+
 /**
  *
  * @author gabri
  */
 public class TaskView extends javax.swing.JFrame {
+    private RepublicController republicController;
+    private TaskModel taskModel;
+    private UserModel userModel;
+    
+    private FeedbackModel feedbackModel;
+    private boolean isResponsible;
+    
+    public void setTaskModel(TaskModel taskModel) {
+        this.taskModel = taskModel;
+    }
+    
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+    
+    public void setFeedbackModel(FeedbackModel feedbackModel) {
+        this.feedbackModel = feedbackModel;
+    }
+    
+    public void load() {
+        this.titleLabel.setText(this.taskModel.getTitle());
+        this.descriptionPanel.setText(this.taskModel.getDescription());
+        this.userOwnerLabel.setText("Responsável: " + this.userModel.getName());
+        
+        if (this.userModel.getUuid().equals(taskModel.getUserUuid())) {
+            this.feedbackPanel.setVisible(false);
+            return;
+        }
+        
+        this.commentArea.setText(this.feedbackModel.getComment());
+        this.scoreSpinner.setValue(this.feedbackModel.getScore());
+    }
 
     /**
      * Creates new form TaskView
      */
-    public TaskView() {
+    public TaskView(RepublicController republicController) {
+        this.republicController = republicController;
         initComponents();
     }
 

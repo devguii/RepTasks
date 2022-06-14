@@ -47,4 +47,32 @@ public class TaskDAO extends Database {
             return tasks;
         }
     }
+
+    public TaskModel findByUuid(String uuid) {
+        TaskModel taskModel = null;
+        try {
+            this.preparedStatement = this.connection.prepareStatement("SELECT * FROM Tasks WHERE uuid = ?");
+            PGobject uuidObject = new PGobject();
+            uuidObject.setType("uuid");
+            uuidObject.setValue(uuid);
+            this.preparedStatement.setObject(1, uuidObject);
+            this.resultSet = this.preparedStatement.executeQuery();
+
+            if (this.resultSet.next()) {
+                taskModel = new TaskModel();
+                taskModel.setUuid(this.resultSet.getString("uuid"));
+                taskModel.setTitle(this.resultSet.getString("title"));
+                taskModel.setDescription(this.resultSet.getString("description"));
+                taskModel.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
+                taskModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                taskModel.setIsDone(this.resultSet.getBoolean("is_done"));
+                taskModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
+                taskModel.setUserUuid(this.resultSet.getString("user_uuid"));
+            }
+        } catch (SQLException error) {
+            this.connection.rollback();
+        } finally {
+            return taskModel;
+        }
+    }
 }
