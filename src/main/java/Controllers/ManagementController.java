@@ -11,11 +11,11 @@ import Views.RepublicView;
  *
  * @author Gabriel Barbosa Silva 2211114
  */
-public class ManagementController {
+public class AdministrationController {
     private RepublicView republicView;
     private AdministrationPanel adminPanel;
     
-    public ManagementController(RepublicView republicView) {
+    public AdministrationController(RepublicView republicView) {
         this.republicView = republicView;
         this.adminPanel = new AdministrationPanel(this);
         this.adminPanel.setVisible(false);
