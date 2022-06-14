@@ -45,6 +45,8 @@ public class SignUpView extends javax.swing.JFrame {
         passwordConfirmLabel = new javax.swing.JLabel();
         passwordConfirmField = new javax.swing.JPasswordField();
         passwordField = new javax.swing.JPasswordField();
+        nameField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RepTasks");
@@ -73,6 +75,8 @@ public class SignUpView extends javax.swing.JFrame {
 
         passwordConfirmLabel.setText("Confirmar senha:");
 
+        jLabel2.setText("Nome:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,6 +90,8 @@ public class SignUpView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nameField)
                     .addComponent(passwordConfirmField)
                     .addComponent(passwordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -100,6 +106,10 @@ public class SignUpView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(repTasksLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usernameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,14 +137,17 @@ public class SignUpView extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        String name = this.nameField.getText().trim();
         String username = this.usernameField.getText().trim();
         String password = new String(this.passwordField.getPassword()).trim();
         String confirmPassword = new String(this.passwordConfirmField.getPassword()).trim();
-        this.signUpController.register(username, password, confirmPassword);
+        this.signUpController.register(name, username, password, confirmPassword);
     }//GEN-LAST:event_registerButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
+    private javax.swing.JTextField nameField;
     private javax.swing.JPasswordField passwordConfirmField;
     private javax.swing.JLabel passwordConfirmLabel;
     private javax.swing.JPasswordField passwordField;

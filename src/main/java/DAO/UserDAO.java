@@ -8,6 +8,7 @@ import Models.UserModel;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import org.postgresql.util.PGobject;
@@ -25,9 +26,10 @@ public class UserDAO extends Database {
     public boolean create(UserModel user) {
         boolean isCreated = false;
         try {
-            this.preparedStatement = this.connection.prepareStatement("INSERT INTO Users(username, password) VALUES (?, ?)");
-            this.preparedStatement.setString(1, user.getUsername());
-            this.preparedStatement.setString(2, user.getPassword());
+            this.preparedStatement = this.connection.prepareStatement("INSERT INTO Users(name, username, password) VALUES (?, ?, ?)");
+            this.preparedStatement.setString(1, user.getName());
+            this.preparedStatement.setString(2, user.getUsername());
+            this.preparedStatement.setString(3, user.getPassword());
             int response = this.preparedStatement.executeUpdate();
             
             if (response == 1) {
@@ -44,16 +46,20 @@ public class UserDAO extends Database {
         }
     }
     
-    public UserModel findByUuid(UUID uuid) {
+    public UserModel findByUuid(String uuid) {
         UserModel userModel = null;
         try {
             this.preparedStatement = this.connection.prepareStatement("SELECT * FROM Users WHERE uuid = ?");
-            this.preparedStatement.setString(1, uuid.toString());
+            PGobject uuidObject = new PGobject();
+            uuidObject.setType("uuid");
+            uuidObject.setValue(uuid);
+            this.preparedStatement.setObject(1, uuidObject);
             this.resultSet = this.preparedStatement.executeQuery();
             
             if (this.resultSet.next()) {
                 userModel = new UserModel();
                 userModel.setUuid(this.resultSet.getString("uuid"));
+                userModel.setName(this.resultSet.getString("name"));
                 userModel.setUsername(this.resultSet.getString("username"));
                 userModel.setPassword(this.resultSet.getString("password"));
                 userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
@@ -77,6 +83,7 @@ public class UserDAO extends Database {
             if (this.resultSet.next()) {
                 userModel = new UserModel();
                 userModel.setUuid(this.resultSet.getString("uuid"));
+                userModel.setName(this.resultSet.getString("name"));
                 userModel.setUsername(this.resultSet.getString("username"));
                 userModel.setPassword(this.resultSet.getString("password"));
                 userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
@@ -105,12 +112,13 @@ public class UserDAO extends Database {
             republicUuid.setType("uuid");
             republicUuid.setValue(userModel.getRepublicUuid().toString());
             
-            this.preparedStatement = this.connection.prepareStatement("UPDATE Users SET username = ?, password = ?, republic_uuid = ?, updated_at = ? WHERE uuid = ?");
-            this.preparedStatement.setString(1, userModel.getUsername());
-            this.preparedStatement.setString(2, userModel.getPassword());
-            this.preparedStatement.setObject(3, republicUuid);
-            this.preparedStatement.setTimestamp(4, updatedAt);
-            this.preparedStatement.setObject(5, userUuid);
+            this.preparedStatement = this.connection.prepareStatement("UPDATE Users SET name = ?, username = ?, password = ?, republic_uuid = ?, updated_at = ? WHERE uuid = ?");
+            this.preparedStatement.setString(1, userModel.getName());
+            this.preparedStatement.setString(2, userModel.getUsername());
+            this.preparedStatement.setString(3, userModel.getPassword());
+            this.preparedStatement.setObject(4, republicUuid);
+            this.preparedStatement.setTimestamp(5, updatedAt);
+            this.preparedStatement.setObject(6, userUuid);
             int result = this.preparedStatement.executeUpdate();
             
             if (result == 1) {
@@ -123,6 +131,35 @@ public class UserDAO extends Database {
             JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário22!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
         } finally {
             return userModel;
+        }
+    }
+
+    public ArrayList<UserModel> findAllByRepublicUuid(String republicUuid) {
+        ArrayList<UserModel> users = new ArrayList<>();
+        try {
+            this.preparedStatement = this.connection.prepareStatement("SELECT * FROM Users WHERE republic_uuid = ?");
+            PGobject republicUuidObject = new PGobject();
+            republicUuidObject.setType("uuid");
+            republicUuidObject.setValue(republicUuid);
+            this.preparedStatement.setObject(1, republicUuidObject);
+            this.resultSet = this.preparedStatement.executeQuery();
+            
+            while (this.resultSet.next()) {
+                UserModel userModel = new UserModel();
+                userModel.setUuid(this.resultSet.getString("uuid"));
+                userModel.setName(this.resultSet.getString("name"));
+                userModel.setUsername(this.resultSet.getString("username"));
+                userModel.setPassword(this.resultSet.getString("password"));
+                userModel.setRepublicUuid(this.resultSet.getString("republic_uuid"));
+                userModel.setCreatedAt(this.resultSet.getTimestamp("created_at").toLocalDateTime());
+                userModel.setUpdatedAt(this.resultSet.getTimestamp("updated_at").toLocalDateTime());
+                users.add(userModel);
+            }
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            JOptionPane.showMessageDialog(null, "Não foi possível buscar o usuário!", "Banco de dados", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            return users;
         }
     }
 }

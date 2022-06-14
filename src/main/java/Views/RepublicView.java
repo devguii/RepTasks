@@ -5,7 +5,11 @@
 package Views;
 
 import Controllers.RepublicController;
+import Models.RepublicModel;
+import Models.TaskModel;
 import Models.UserModel;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,9 +18,49 @@ import Models.UserModel;
 public class RepublicView extends javax.swing.JFrame {
     private RepublicController republicController;
     private UserModel userModel;
+    private RepublicModel republicModel;
+    private ArrayList<TaskModel> tasksModel;
+    private ArrayList<UserModel> usersModel;
     
     public void setUser(UserModel userModel) {
         this.userModel = userModel;
+    }
+    
+    public void setRepublic(RepublicModel republicModel) {
+        this.republicModel = republicModel;
+    }
+    
+    public void setTasks(ArrayList<TaskModel> tasksModel) {
+        this.tasksModel = tasksModel;
+    }
+    
+    public void setUsers(ArrayList<UserModel> usersModel) {
+        this.usersModel = usersModel;
+    }
+
+    public void load() {
+        DefaultTableModel taskTableModel = (DefaultTableModel) this.tasksTable.getModel();
+        for (TaskModel taskModel : this.tasksModel) {
+            Object[] row = {
+                taskModel.getTitle(), taskModel.getUserUuid(), taskModel.getIsDone(), taskModel.getExpiresAt(),
+            };
+            taskTableModel.addRow(row);
+        }
+        
+        DefaultTableModel userTableModel = (DefaultTableModel) this.usersTable.getModel();
+        for (UserModel userModel : this.usersModel) {
+            String cargo = "Usuário";
+            
+            if (userModel.getUuid().equals(this.republicModel.getUserUuid())) {
+                cargo = "Administrador";
+            }
+            
+            Object[] row = {
+                userModel.getName(), cargo,
+            };
+            userTableModel.addRow(row);
+        }
+        
     }
 
     /**
@@ -65,6 +109,7 @@ public class RepublicView extends javax.swing.JFrame {
         republicButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("República"));
 
@@ -144,13 +189,13 @@ public class RepublicView extends javax.swing.JFrame {
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Tarefa", "Usuário", "Estado", "Expiração"
+                "Usuário", "Cargo"
             }
         ));
         scrollPanel2.setViewportView(usersTable);

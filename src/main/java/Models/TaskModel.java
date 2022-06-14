@@ -52,6 +52,14 @@ public class TaskModel {
         }
     }
     
+    public void setRepublicUuid(String republicUuid) {
+        try {
+            this.republicUuid = UUID.fromString(republicUuid);
+        } catch (Exception error) {
+            this.republicUuid = null;
+        }
+    }
+    
     public void setRepublic(RepublicModel republic) {
         this.republic = republic;
     }
@@ -94,6 +102,10 @@ public class TaskModel {
     
     public RepublicModel getRepublic() {
         return this.republic;
+    }
+    
+    public UUID getRepublicUuid() {
+        return this.republicUuid;
     }
     
     public UserModel getUser() {

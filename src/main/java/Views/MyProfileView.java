@@ -50,6 +50,7 @@ public class MyProfileView extends javax.swing.JFrame {
         republicButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Meu Perfil"));
 

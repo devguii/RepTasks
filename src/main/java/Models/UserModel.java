@@ -15,6 +15,7 @@ import java.util.UUID;
  */
 public class UserModel {
     private UUID uuid;
+    private String name;
     private String username;
     private String password;
     private UUID republicUuid;
@@ -31,6 +32,14 @@ public class UserModel {
         } catch (Exception error) {
             this.uuid = null;
         }
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getName() {
+        return this.name;
     }
     
     public void setUsername(String username) {

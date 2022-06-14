@@ -45,6 +45,7 @@ public class SignInController {
     }
     
     public void toRepublic() {
+        this.signInView.emptyFields();
         this.close();
         this.republicController.view();
     }
@@ -63,7 +64,7 @@ public class SignInController {
         }
         
         this.close();
-        this.republicController.setUser(user);
+        this.republicController.setUserUuid(user.getUuid().toString());
         this.republicController.view();
         return;
     }

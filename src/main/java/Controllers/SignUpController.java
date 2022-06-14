@@ -41,7 +41,7 @@ public class SignUpController {
         this.signInController.view();
     }
 
-    public void register(String username, String password, String confirmPassword) {
+    public void register(String name, String username, String password, String confirmPassword) {
         UserModel user = this.userDAO.findByUsername(username);
         
         if (!confirmPassword.equals(password)) {
@@ -56,6 +56,7 @@ public class SignUpController {
         
         Hash passwordHash = Password.hash(password).addRandomSalt().withArgon2();
         user = new UserModel();
+        user.setName(name);
         user.setUsername(username);
         user.setPassword(passwordHash.getResult());
         

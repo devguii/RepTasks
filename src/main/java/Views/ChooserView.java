@@ -45,6 +45,7 @@ public class ChooserView extends javax.swing.JFrame {
         tasksDoneLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Seja bem vindo ao RepTasks"));
 

@@ -5,6 +5,7 @@
 package Controllers;
 
 import DAO.RepublicDAO;
+import DAO.TaskDAO;
 import DAO.UserDAO;
 import Models.RepublicModel;
 import Models.TaskModel;
@@ -24,17 +25,28 @@ public class RepublicController {
     private String userUuid;
     private RepublicDAO republicDAO;
     private UserDAO userDAO;
+    private TaskDAO taskDAO;
     private RepublicView republicView;
     private SignInController signInController;
     private UserModel user;
     private RepublicModel republic;
     private ArrayList<TaskModel> tasks;
+    private ArrayList<UserModel> users;
+    
+    public void setUserUuid(String userUuid) {
+        this.userUuid = userUuid;
+    }
+    
+    public String getUserUuid() {
+        return this.userUuid;
+    }
     
     public RepublicController(SignInController signInController) {
         this.signInController = signInController;
         this.republicView = new RepublicView(this);
         this.republicDAO = new RepublicDAO();
         this.userDAO = new UserDAO();
+        this.taskDAO = new TaskDAO();
     }
     
     public void view() {
@@ -45,26 +57,28 @@ public class RepublicController {
         this.republicView.setVisible(false);
     }
     
-    public void setFeedbacks() {
+    public void load() {
+        this.user = this.userDAO.findByUuid(this.userUuid);
         
-    }
-    
-    public void setRepublic() {
-        String republicUuid = this.user.getRepublicUuid().toString();
-        this.republic = this.republicDAO.findByUuid(republicUuid);
-        //this.republicView.setRepublic(this.republic);
-    }
-    
-    public void setUser(UserModel user) {
-        this.user = user;
-        if (this.user.getRepublicUuid() != null) {
-            this.setRepublic();
+        if (this.user != null) {
+            this.republicView.setUser(user);
+            this.republic = this.republicDAO.findByUuid(this.user.getRepublicUuid().toString());
+            
+            if (this.republic == null) {
+                return;
+            }
+            
+            this.republicView.setRepublic(republic);
+            
+            this.tasks = this.taskDAO.findAllTasksByRepublicUuid(this.republic.getUuid().toString());
+            this.users = this.userDAO.findAllByRepublicUuid(this.user.getRepublicUuid().toString());
+            
+            this.republicView.setTasks(tasks);
+            this.republicView.setUsers(users);
+        } else {
+            this.signInController.view();
+            this.close();
         }
-        this.republicView.setUser(user);
-    }
-    
-    public UserModel getUser() {
-        return this.user;
     }
     
     public void create(String name, String password) {
@@ -92,7 +106,7 @@ public class RepublicController {
 
             this.user.setRepublicUuid(republic.getUuid().toString());
             this.user = this.userDAO.update(this.user);
-            this.setUser(this.user);
+            this.load();
 
             JOptionPane.showMessageDialog(null, "República criada com sucesso!", "República", JOptionPane.INFORMATION_MESSAGE);
             //this.republicView.viewTasksView();

@@ -43,6 +43,7 @@ public class ChangeRepublicView extends javax.swing.JFrame {
         myTasksButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Alterar República"));
 
