@@ -78,7 +78,9 @@
                       <Component id="separator2" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="doneTaskButton" min="-2" pref="171" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="alterTaskButton" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="deleteButton" min="-2" pref="196" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -106,6 +108,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="doneTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="alterTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="separator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -197,7 +200,11 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="scoreSpinner" min="-2" max="-2" attributes="0"/>
-                                  <Component id="sendFeedbackButton" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="sendFeedbackButton" min="-2" pref="184" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="editFeedbackButton" min="-2" pref="178" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -213,7 +220,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scoreSpinner" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="sendFeedbackButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="sendFeedbackButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="editFeedbackButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -262,6 +272,17 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="editFeedbackButton">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="52" green="b4" red="b0" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Alterar Feedback"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="deleteButton">
@@ -270,6 +291,17 @@
               <Color blue="52" green="50" red="b0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Deletar Tarefa"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="alterTaskButton">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="52" green="b4" red="b0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Alterar Tarefa"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -291,7 +323,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="isLoggedInLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="logoLabel" alignment="0" pref="193" max="32767" attributes="0"/>
-                      <Component id="adminButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="republicButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="myTasksButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="myProfileButton" alignment="0" max="32767" attributes="0"/>
@@ -320,8 +351,6 @@
                   <Component id="republicButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="myTasksButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="adminButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -337,11 +366,6 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="REPTASKS"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="adminButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Administrar Rep&#xfa;blica"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="republicButton">

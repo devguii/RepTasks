@@ -41,7 +41,6 @@ public class MyProfileView extends javax.swing.JFrame {
         viewFeedbackButton = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
-        adminButton = new javax.swing.JButton();
         myTasksButton = new javax.swing.JButton();
         myProfileButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
@@ -167,8 +166,6 @@ public class MyProfileView extends javax.swing.JFrame {
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setText("REPTASKS");
 
-        adminButton.setText("Administrar República");
-
         myTasksButton.setText("Minhas Tarefas");
 
         myProfileButton.setText("Meu Perfil");
@@ -195,7 +192,6 @@ public class MyProfileView extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(adminButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -221,8 +217,6 @@ public class MyProfileView extends javax.swing.JFrame {
                 .addComponent(republicButton)
                 .addGap(18, 18, 18)
                 .addComponent(myTasksButton)
-                .addGap(18, 18, 18)
-                .addComponent(adminButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addContainerGap())
@@ -288,7 +282,6 @@ public class MyProfileView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adminButton;
     private javax.swing.JTextField confirmNewPasswordField;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel feedbackPanel;

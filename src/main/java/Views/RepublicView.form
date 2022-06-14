@@ -121,7 +121,7 @@
                           <Component id="searchTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scrollPanel" pref="0" max="32767" attributes="0"/>
+                      <Component id="scrollPanel" pref="155" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="openTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -319,7 +319,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="isLoggedInLabel" max="32767" attributes="0"/>
                       <Component id="logoLabel" pref="193" max="32767" attributes="0"/>
-                      <Component id="adminButton" max="32767" attributes="0"/>
                       <Component id="myTasksButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="myProfileButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="logoutButton" alignment="0" max="32767" attributes="0"/>
@@ -348,9 +347,7 @@
                   <Component id="republicButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="myTasksButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="adminButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="137" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -365,11 +362,6 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="REPTASKS"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="adminButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Administrar Rep&#xfa;blica"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="myTasksButton">

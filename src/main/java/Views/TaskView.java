@@ -41,10 +41,11 @@ public class TaskView extends javax.swing.JFrame {
         scoreSpinner = new javax.swing.JSpinner();
         scrollPanel2 = new javax.swing.JScrollPane();
         commentArea = new javax.swing.JTextArea();
+        editFeedbackButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        alterTaskButton = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
-        adminButton = new javax.swing.JButton();
         republicButton = new javax.swing.JButton();
         myTasksButton = new javax.swing.JButton();
         myProfileButton = new javax.swing.JButton();
@@ -93,6 +94,10 @@ public class TaskView extends javax.swing.JFrame {
         commentArea.setRows(5);
         scrollPanel2.setViewportView(commentArea);
 
+        editFeedbackButton.setBackground(new java.awt.Color(176, 180, 82));
+        editFeedbackButton.setForeground(new java.awt.Color(255, 255, 255));
+        editFeedbackButton.setText("Alterar Feedback");
+
         javax.swing.GroupLayout feedbackPanelLayout = new javax.swing.GroupLayout(feedbackPanel);
         feedbackPanel.setLayout(feedbackPanelLayout);
         feedbackPanelLayout.setHorizontalGroup(
@@ -104,7 +109,10 @@ public class TaskView extends javax.swing.JFrame {
                     .addGroup(feedbackPanelLayout.createSequentialGroup()
                         .addGroup(feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(scoreSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sendFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(feedbackPanelLayout.createSequentialGroup()
+                                .addComponent(sendFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -115,12 +123,18 @@ public class TaskView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scoreSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(sendFeedbackButton)
+                .addGroup(feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sendFeedbackButton)
+                    .addComponent(editFeedbackButton))
                 .addContainerGap())
         );
 
         deleteButton.setBackground(new java.awt.Color(176, 80, 82));
         deleteButton.setText("Deletar Tarefa");
+
+        alterTaskButton.setBackground(new java.awt.Color(176, 180, 82));
+        alterTaskButton.setForeground(new java.awt.Color(255, 255, 255));
+        alterTaskButton.setText("Alterar Tarefa");
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -143,7 +157,9 @@ public class TaskView extends javax.swing.JFrame {
                     .addComponent(separator2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                         .addComponent(doneTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alterTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -164,7 +180,8 @@ public class TaskView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(doneTaskButton)
-                    .addComponent(deleteButton))
+                    .addComponent(deleteButton)
+                    .addComponent(alterTaskButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,8 +194,6 @@ public class TaskView extends javax.swing.JFrame {
         logoLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setText("REPTASKS");
-
-        adminButton.setText("Administrar República");
 
         republicButton.setText("República");
 
@@ -206,7 +221,6 @@ public class TaskView extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(adminButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(republicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -232,8 +246,6 @@ public class TaskView extends javax.swing.JFrame {
                 .addComponent(republicButton)
                 .addGap(18, 18, 18)
                 .addComponent(myTasksButton)
-                .addGap(18, 18, 18)
-                .addComponent(adminButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addContainerGap())
@@ -299,13 +311,14 @@ public class TaskView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adminButton;
+    private javax.swing.JButton alterTaskButton;
     private javax.swing.JTextArea commentArea;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel createdLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextPane descriptionPanel;
     private javax.swing.JButton doneTaskButton;
+    private javax.swing.JButton editFeedbackButton;
     private javax.swing.JLabel expiresLabel;
     private javax.swing.JPanel feedbackPanel;
     private javax.swing.JLabel isLoggedInLabel;
