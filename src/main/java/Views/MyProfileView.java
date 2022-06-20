@@ -4,20 +4,54 @@
  */
 package Views;
 
+import Controllers.MyProfileController;
 import Controllers.RepublicController;
+import Models.FeedbackModel;
+import Models.RepublicModel;
+import Models.TaskModel;
+import Models.UserModel;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author gabri
  */
 public class MyProfileView extends javax.swing.JFrame {
-    private RepublicController republicController;
+    private UserModel profile; 
+    private ArrayList<FeedbackModel> feedbacks;
+    private MyProfileController myProfileController;
+    
+    public void setProfile(UserModel user, RepublicModel republic, ArrayList<FeedbackModel> feedbacks) {
+        this.profile = user;
+        this.nameField.setText(user.getName());
+        this.usernameField.setText(user.getUsername());
+        this.feedbacks = feedbacks;
+        if (republic != null) {
+            this.republicLabel.setText("República: " + republic.getName());
+        } else {
+            this.republicLabel.setText("República: -");
+        }
+        
+        System.out.println(feedbacks);
+
+        //add feedbacks to this.feedbacksTable
+
+        DefaultTableModel model = (DefaultTableModel) this.feedbacksTable.getModel();
+        model.setRowCount(0);
+        for (FeedbackModel feedback : feedbacks) {
+            TaskModel task = this.myProfileController.getTaskFeedback(feedback.getTaskUuid().toString());
+            UserModel userrep = this.myProfileController.getUserFeedback(feedback.getUserUuid().toString());
+            model.addRow(new Object[]{task.getTitle(), this.profile.getName(), feedback.getScore(), feedback.getCreatedAt()});
+        }
+    }
     
     /**
      * Creates new form MyProfileView
      */
-    public MyProfileView(RepublicController republicController) {
-        this.republicController = republicController;
+    public MyProfileView(MyProfileController myProfileController) {
+        this.myProfileController = myProfileController;
         initComponents();
     }
 
@@ -31,31 +65,23 @@ public class MyProfileView extends javax.swing.JFrame {
     private void initComponents() {
 
         contentPanel = new javax.swing.JPanel();
-        usernameField = new javax.swing.JTextField();
         oldPasswordField = new javax.swing.JPasswordField();
-        newPasswordField = new javax.swing.JTextField();
-        confirmNewPasswordField = new javax.swing.JTextField();
         nameField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         republicLabel = new javax.swing.JLabel();
-        outRepublicButton = new javax.swing.JButton();
         feedbackPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         feedbacksTable = new javax.swing.JTable();
-        viewFeedbackButton = new javax.swing.JButton();
+        usernameField = new javax.swing.JLabel();
+        newPasswordField = new javax.swing.JPasswordField();
+        confirmNewPasswordField = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Meu Perfil"));
 
-        usernameField.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário"));
-
         oldPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Senha Atual"));
-
-        newPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nova Senha"));
-
-        confirmNewPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Confirmar Nova Senha"));
 
         nameField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome"));
 
@@ -71,17 +97,11 @@ public class MyProfileView extends javax.swing.JFrame {
         republicLabel.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         republicLabel.setText("República");
 
-        outRepublicButton.setBackground(new java.awt.Color(176, 80, 82));
-        outRepublicButton.setText("Sair da República");
-
         feedbackPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Feedbacks"));
 
         feedbacksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tarefa", "Usuário", "Score", "Criação"
@@ -89,32 +109,29 @@ public class MyProfileView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(feedbacksTable);
 
-        viewFeedbackButton.setBackground(new java.awt.Color(76, 80, 182));
-        viewFeedbackButton.setForeground(new java.awt.Color(255, 255, 255));
-        viewFeedbackButton.setText("Visualizar Feedback");
-
         javax.swing.GroupLayout feedbackPanelLayout = new javax.swing.GroupLayout(feedbackPanel);
         feedbackPanel.setLayout(feedbackPanelLayout);
         feedbackPanelLayout.setHorizontalGroup(
             feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(feedbackPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(feedbackPanelLayout.createSequentialGroup()
-                        .addComponent(viewFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
                 .addContainerGap())
         );
         feedbackPanelLayout.setVerticalGroup(
             feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(feedbackPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewFeedbackButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        usernameField.setText("Usuário");
+        usernameField.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário"));
+
+        newPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Nova Senha"));
+
+        confirmNewPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Confirmar Nova Senha"));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -123,18 +140,16 @@ public class MyProfileView extends javax.swing.JFrame {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameField)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(republicLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                        .addComponent(outRepublicButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(usernameField)
-                    .addComponent(oldPasswordField)
-                    .addComponent(newPasswordField)
                     .addComponent(confirmNewPasswordField)
-                    .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(nameField)
+                    .addComponent(republicLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oldPasswordField)
+                    .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(newPasswordField)
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -143,20 +158,18 @@ public class MyProfileView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usernameField)
+                .addGap(8, 8, 8)
                 .addComponent(oldPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confirmNewPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(republicLabel)
-                    .addComponent(outRepublicButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(confirmNewPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(republicLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -182,22 +195,34 @@ public class MyProfileView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        
+        try {
+            String name = this.nameField.getText();
+            String oldPassword = new String(this.oldPasswordField.getPassword());
+            String newPassword = new String(this.newPasswordField.getPassword());
+            String confirmNewPassword = new String(this.confirmNewPasswordField.getPassword());
+
+            if (name.isEmpty() && oldPassword.isEmpty() && newPassword.isEmpty() && confirmNewPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            this.myProfileController.updateUser(name, oldPassword, newPassword, confirmNewPassword);
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField confirmNewPasswordField;
+    private javax.swing.JPasswordField confirmNewPasswordField;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel feedbackPanel;
     private javax.swing.JTable feedbacksTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameField;
-    private javax.swing.JTextField newPasswordField;
+    private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JPasswordField oldPasswordField;
-    private javax.swing.JButton outRepublicButton;
     private javax.swing.JLabel republicLabel;
     private javax.swing.JButton saveButton;
-    private javax.swing.JTextField usernameField;
-    private javax.swing.JButton viewFeedbackButton;
+    private javax.swing.JLabel usernameField;
     // End of variables declaration//GEN-END:variables
 }

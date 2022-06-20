@@ -94,4 +94,29 @@ public class RepublicDAO extends Database {
             return isCreated;
         }
     }
+
+    public boolean removeUserAdmin(RepublicModel republic) {
+        boolean isRemoved = false;
+        try {
+            this.preparedStatement = this.connection.prepareStatement("UPDATE Republic SET user_uuid = NULL WHERE uuid = ?");
+            PGobject uuidObj = new PGobject();
+            uuidObj.setType("uuid");
+            uuidObj.setValue(republic.getUuid().toString());
+            this.preparedStatement.setObject(1, uuidObj);
+            int response = this.preparedStatement.executeUpdate();
+            
+            if (response == 1) {
+                isRemoved = true;
+                this.connection.commit();
+            } else {
+                isRemoved = false;
+                this.connection.rollback();
+            }
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            this.connection.rollback();
+        } finally {
+            return isRemoved;
+        }
+    }
 }

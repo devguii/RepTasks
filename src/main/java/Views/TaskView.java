@@ -26,6 +26,14 @@ public class TaskView extends javax.swing.JFrame {
         this.dispose();
     }
     
+    public void removeDone() {
+        this.doneTaskButton.setVisible(false);
+    }
+    
+    public void addDone() {
+        this.doneTaskButton.setVisible(true);
+    }
+    
     public void setTaskModel(TaskModel taskModel) {
         this.taskModel = taskModel;
     }
@@ -50,16 +58,35 @@ public class TaskView extends javax.swing.JFrame {
         } else {
             this.updatedLabel.setText("Data de atualização: " + this.taskModel.getUpdatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
         }
+       
+        if (this.feedbackModel != null ) {
+            this.commentArea.setText(this.feedbackModel.getComment());
+            this.scoreSpinner.setValue(this.feedbackModel.getScore());
+        }
         
         if (this.userModel.getUuid().equals(taskModel.getUserUuid())) {
             this.feedbackPanel.setVisible(false);
-            return;
+            this.addDone();
         }
         
-        this.feedbackPanel.setVisible(false);
-        
-        //this.commentArea.setText(this.feedbackModel.getComment());
-        //this.scoreSpinner.setValue(this.feedbackModel.getScore());
+        if (
+            this.userModel.getUuid().equals(this.republicController.getRepublic().getUserUuid())
+            ||
+            this.userModel.getUuid().equals(taskModel.getUserUuid())
+        ) {
+            this.addDone();
+        } else {
+            this.removeDone();
+        }
+
+        if (!this.taskModel.getIsDone()) {
+            this.feedbackPanel.setVisible(false);
+        } else {
+            this.doneTaskButton.setVisible(false);
+            if (!this.userModel.getUuid().equals(taskModel.getUserUuid())) {
+                this.feedbackPanel.setVisible(true);
+            }
+        }
     }
 
     /**
@@ -134,7 +161,13 @@ public class TaskView extends javax.swing.JFrame {
         sendFeedbackButton.setBackground(new java.awt.Color(76, 180, 82));
         sendFeedbackButton.setForeground(new java.awt.Color(255, 255, 255));
         sendFeedbackButton.setText("Enviar Feedback");
+        sendFeedbackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendFeedbackButtonActionPerformed(evt);
+            }
+        });
 
+        scoreSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
         scoreSpinner.setBorder(javax.swing.BorderFactory.createTitledBorder("Score"));
 
         scrollPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentário"));
@@ -146,6 +179,11 @@ public class TaskView extends javax.swing.JFrame {
         editFeedbackButton.setBackground(new java.awt.Color(176, 180, 82));
         editFeedbackButton.setForeground(new java.awt.Color(255, 255, 255));
         editFeedbackButton.setText("Alterar Feedback");
+        editFeedbackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFeedbackButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout feedbackPanelLayout = new javax.swing.GroupLayout(feedbackPanel);
         feedbackPanel.setLayout(feedbackPanelLayout);
@@ -157,11 +195,11 @@ public class TaskView extends javax.swing.JFrame {
                     .addComponent(scrollPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                     .addGroup(feedbackPanelLayout.createSequentialGroup()
                         .addGroup(feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scoreSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(feedbackPanelLayout.createSequentialGroup()
                                 .addComponent(sendFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(editFeedbackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scoreSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -248,6 +286,26 @@ public class TaskView extends javax.swing.JFrame {
     private void doneTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneTaskButtonActionPerformed
         this.republicController.taskDone(this.taskModel);
     }//GEN-LAST:event_doneTaskButtonActionPerformed
+
+    private void sendFeedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendFeedbackButtonActionPerformed
+        try {
+            String comment = this.commentArea.getText();
+            Double score = Double.parseDouble(this.scoreSpinner.getValue().toString());
+            this.republicController.sendFeedback(this.taskModel, comment, score);
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+        }
+    }//GEN-LAST:event_sendFeedbackButtonActionPerformed
+
+    private void editFeedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFeedbackButtonActionPerformed
+        try {
+            String comment = this.commentArea.getText();
+            Double score = Double.parseDouble(this.scoreSpinner.getValue().toString());
+            this.republicController.updateFeedback(this.taskModel, comment, score);
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+        }
+    }//GEN-LAST:event_editFeedbackButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea commentArea;

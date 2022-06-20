@@ -32,6 +32,7 @@ DAO\TaskDAO.class
 Models\RepublicModel.class
 Views\UserView.class
 Views\RepublicView$1.class
+Views\TaskView$1.class
 DAO\UserDAO.class
 Views\RepublicView$3.class
 Views\ChooserView$1.class
@@ -46,4 +47,5 @@ DAO\RepublicDAO.class
 Views\RepublicView$10.class
 Views\SignUpView$1.class
 Views\SignInView.class
+Views\RepublicView$13.class
 utils\JDBC.class

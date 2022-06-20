@@ -179,24 +179,30 @@ public class EditTaskView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        String title = this.titleField.getText().trim();
-        String description = this.descriptionArea.getText();
-        String deadline = this.expiresField.getText();
-        int userId = this.userList.getSelectedIndex();
-
-        String userUuid = this.usersModel.get(userId).getUuid().toString();
-
-        if (title.isEmpty() || description.isEmpty() || deadline.isEmpty() || userId == -1 || userUuid.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos corretamente", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         try {
-            LocalDateTime expiresAt = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            
+            String title = this.titleField.getText().trim();
+            String description = this.descriptionArea.getText();
+            String deadline = this.expiresField.getText();
+            int userId = this.userList.getSelectedIndex();
 
-            this.republicController.editTask(this.taskModel.getUuid().toString(), title, description, userUuid, expiresAt);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Data inválida", "Erro", JOptionPane.ERROR_MESSAGE);
+            String userUuid = this.usersModel.get(userId).getUuid().toString();
+
+            if (title.isEmpty() || description.isEmpty() || deadline.isEmpty() || userId == -1 || userUuid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos corretamente", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                LocalDateTime expiresAt = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+                this.republicController.editTask(this.taskModel.getUuid().toString(), title, description, userUuid, expiresAt);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Data inválida", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, "Dados inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
     }//GEN-LAST:event_editButtonActionPerformed

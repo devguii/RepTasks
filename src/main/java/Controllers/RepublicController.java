@@ -57,6 +57,44 @@ public class RepublicController {
         return this.userUuid;
     }
     
+    public void exitRepublic() {
+        if (this.republic.getUserUuid().equals(this.userUuid)) {
+            this.republicDAO.removeUserAdmin(this.republic);
+
+            ArrayList<UserModel> users = this.userDAO.findAllByRepublicUuid(this.republic.getUuid().toString());
+            for (UserModel user : users) {
+                this.userDAO.removeRepublic(user, this.republic);
+            }
+
+            ArrayList<TaskModel> tasks = this.taskDAO.findAllTasksByRepublicUuid(this.republic.getUuid().toString());
+            for (TaskModel task : tasks) {
+                if (!task.getIsDone()) {
+                    this.taskDAO.delete(task);
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, "República removida com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.republic = null;
+            this.user.setRepublicUuid(null);
+            this.load();
+            return;
+        }
+
+        ArrayList<TaskModel> tasks = this.taskDAO.findAllTasksByRepublicUuid(this.republic.getUuid().toString());
+
+        for (TaskModel task : tasks) {
+            if (!task.getIsDone()) {
+                task.setUserUuid(this.republic.getUserUuid().toString());
+                this.taskDAO.update(task);
+            }
+        }
+        
+        this.userDAO.removeRepublic(this.user, this.republic);
+        this.user.setRepublicUuid(null);
+        this.load();
+        JOptionPane.showMessageDialog(null, "Você saiu da república com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     public RepublicController(SignInController signInController) {
         this.signInController = signInController;
         this.republicView = new RepublicView(this);
@@ -70,11 +108,14 @@ public class RepublicController {
         this.feedbackDAO = new FeedbackDAO();
         this.addTaskView = new AddTaskView(this);
         this.editTaskView = new EditTaskView(this);
+
+
         this.chooserView = new ChooserView(this);
         this.republicView.invisibleContentPanel();
     }
     
     public void view() {
+        this.load();
         this.republicView.setVisible(true);
     }
     
@@ -92,8 +133,13 @@ public class RepublicController {
             
             if (this.user.getRepublicUuid() == null) {
                 this.chooserView.setVisible(true);
+                //this.republicView.load();
+                this.republicView.invisibleContentPanel();
+                this.republicView.setNoRepublic();
                 return;
             }
+            
+            this.republicView.setRepublic();
             
             this.republicView.visibleContentPanel();
             
@@ -110,7 +156,7 @@ public class RepublicController {
             double score = 0.0;
             double i = 0;
             
-            for (FeedbackModel feedback : this.feedbackDAO.findAllByUserUuid(this.user.getUuid().toString())) {
+            for (FeedbackModel feedback : this.feedbackDAO.findByUuidUserTask(this.user.getUuid().toString())) {
                 score += feedback.getScore();
                 i++;
             }
@@ -217,6 +263,10 @@ public class RepublicController {
         this.taskView.setVisible(true);
     }
     
+    public RepublicModel getRepublic() {
+        return this.republic;
+    }
+    
     public void addTask(String title, String description, String userUuid, LocalDateTime expiresAt) {
         TaskModel task = new TaskModel();
         
@@ -275,6 +325,11 @@ public class RepublicController {
             return;
         }
         
+        if (task.getIsDone()) {
+            JOptionPane.showMessageDialog(null, "Tarefa já foi concluída!", "Tarefas", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if (!this.taskDAO.delete(task)) {
             JOptionPane.showMessageDialog(null, "Não foi possível deletar a tarefa!", "Tarefas", JOptionPane.ERROR_MESSAGE);
             return;
@@ -357,6 +412,11 @@ public class RepublicController {
                 JOptionPane.showMessageDialog(null, "Não foi possível encontrar a tarefa!", "Tarefa", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
+            if (task.getIsDone()) {
+                JOptionPane.showMessageDialog(null, "Tarefa já foi concluída!", "Tarefa", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
             this.editTaskView.setTaskModel(task);
             
@@ -407,5 +467,50 @@ public class RepublicController {
     public void logout() {
         this.close();
         this.signInController.viewDeleteSession();
+    }
+    
+    public void openTasksView() {
+        this.close();
+        this.myTasksController.view();
+    }
+    
+    public void openProfile() {
+        this.myProfileController.setProfile(user);
+        this.myProfileController.view();
+    }
+    
+    public void sendFeedback(TaskModel task, String comment, double score) {
+        FeedbackModel feedback = this.feedbackDAO.findByTaskUuidAndUserUuid(task.getUuid().toString(), this.user.getUuid().toString());
+        
+        if (feedback != null) {
+            JOptionPane.showMessageDialog(null, "Você já enviou feedback", "Feedback", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        feedback = new FeedbackModel();
+        feedback.setComment(comment);
+        feedback.setScore(score);
+        feedback.setUserUuid(this.user.getUuid().toString());
+        feedback.setTaskUuid(task.getUuid().toString());
+        
+        this.feedbackDAO.create(feedback);
+        JOptionPane.showMessageDialog(null, "Feedback criado com sucesso!", "Feedback", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    public void updateFeedback(TaskModel task, String comment, double score) {
+        FeedbackModel feedback = this.feedbackDAO.findByTaskUuidAndUserUuid(task.getUuid().toString(), this.user.getUuid().toString());
+        
+        if (feedback == null) {
+            JOptionPane.showMessageDialog(null, "Você não enviou feedback ainda!", "Feedback", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        feedback.setComment(comment);
+        feedback.setScore(score);
+        
+        this.feedbackDAO.update(feedback);
+        JOptionPane.showMessageDialog(null, "Feedback atualizado com sucesso!", "Feedback", JOptionPane.INFORMATION_MESSAGE);
+        return;
     }
 }

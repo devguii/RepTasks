@@ -4,16 +4,19 @@
  */
 package Views;
 
+import Controllers.MyTasksController;
+
 /**
  *
  * @author gabri
  */
 public class MyTasksView extends javax.swing.JFrame {
-
+    private MyTasksController tasksController;
     /**
      * Creates new form MyTasksView
      */
-    public MyTasksView() {
+    public MyTasksView(MyTasksController tasksController) {
+        this.tasksController = tasksController;
         initComponents();
     }
 
@@ -105,6 +108,11 @@ public class MyTasksView extends javax.swing.JFrame {
         myTasksButton.setEnabled(false);
 
         myProfileButton.setText("Meu Perfil");
+        myProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myProfileButtonActionPerformed(evt);
+            }
+        });
 
         logoutButton.setText("Sair");
 
@@ -118,6 +126,11 @@ public class MyTasksView extends javax.swing.JFrame {
         tasksDoneLabel.setText("Tarefas: [x / x]");
 
         republicButton.setText("República");
+        republicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                republicButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -181,6 +194,14 @@ public class MyTasksView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void republicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_republicButtonActionPerformed
+        this.tasksController.republicView();
+    }//GEN-LAST:event_republicButtonActionPerformed
+
+    private void myProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileButtonActionPerformed
+        this.tasksController.openProfile();
+    }//GEN-LAST:event_myProfileButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;

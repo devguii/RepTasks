@@ -45,7 +45,7 @@ public class ChooserView extends javax.swing.JFrame {
         enterPasswordRepublicField = new javax.swing.JPasswordField();
         enterREpublicButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         contentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Seja bem vindo ao RepTasks"));

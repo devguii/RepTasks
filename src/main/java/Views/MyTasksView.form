@@ -202,6 +202,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Meu Perfil"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myProfileButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="logoutButton">
           <Properties>
@@ -230,6 +233,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Rep&#xfa;blica"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="republicButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

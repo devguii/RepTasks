@@ -12,7 +12,10 @@ import Models.UserModel;
 import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -32,6 +35,14 @@ public class RepublicView extends javax.swing.JFrame {
     
     public void invisibleContentPanel() {
         this.contentPanel.setVisible(false);
+    }
+    
+    public void setNoRepublic() {
+        //this.myTasksButton.setEnabled(false);
+    }
+    
+    public void setRepublic() {
+        //this.myTasksButton.setEnabled(true);
     }
     
     public void setScore(double score) {
@@ -106,8 +117,7 @@ public class RepublicView extends javax.swing.JFrame {
         this.editTaskButton.setVisible(false);
         this.deleteTaskButton.setVisible(false);
         this.removeUserButton.setVisible(false);
-        this.deleteRepButton.setVisible(false);
-        this.updateRepButton.setVisible(false);
+        //this.deleteRepButton.setVisible(false);
     }
     
     public void setIsLoggedInLabel(String name) {
@@ -148,17 +158,13 @@ public class RepublicView extends javax.swing.JFrame {
         searchUserField = new javax.swing.JTextField();
         searchUserButton = new javax.swing.JButton();
         removeUserButton = new javax.swing.JButton();
-        updateRepButton = new javax.swing.JButton();
-        deleteRepButton = new javax.swing.JButton();
         outRepublicButton = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
-        myTasksButton = new javax.swing.JButton();
         myProfileButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         isLoggedInLabel = new javax.swing.JLabel();
         scoreLabel = new javax.swing.JLabel();
-        tasksDoneLabel = new javax.swing.JLabel();
         republicButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -208,6 +214,11 @@ public class RepublicView extends javax.swing.JFrame {
         });
 
         searchTaskButton.setText("Pesquisar");
+        searchTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTaskButtonActionPerformed(evt);
+            }
+        });
 
         editTaskButton.setBackground(new java.awt.Color(176, 180, 82));
         editTaskButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -312,6 +323,11 @@ public class RepublicView extends javax.swing.JFrame {
         });
 
         searchUserButton.setText("Pesquisar");
+        searchUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUserButtonActionPerformed(evt);
+            }
+        });
 
         removeUserButton.setBackground(new java.awt.Color(176, 80, 82));
         removeUserButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -355,22 +371,14 @@ public class RepublicView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        updateRepButton.setBackground(new java.awt.Color(176, 180, 82));
-        updateRepButton.setForeground(new java.awt.Color(255, 255, 255));
-        updateRepButton.setText("Alterar República");
-        updateRepButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateRepButtonActionPerformed(evt);
-            }
-        });
-
-        deleteRepButton.setBackground(new java.awt.Color(176, 80, 82));
-        deleteRepButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteRepButton.setText("Deletar República");
-
         outRepublicButton.setBackground(new java.awt.Color(176, 80, 82));
         outRepublicButton.setForeground(new java.awt.Color(255, 255, 255));
         outRepublicButton.setText("Sair da República");
+        outRepublicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outRepublicButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -383,23 +391,14 @@ public class RepublicView extends javax.swing.JFrame {
                     .addComponent(usersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(outRepublicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateRepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteRepButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(432, 432, 432)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateRepButton)
-                            .addComponent(deleteRepButton)))
-                    .addComponent(outRepublicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(outRepublicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tasksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -412,8 +411,6 @@ public class RepublicView extends javax.swing.JFrame {
         logoLabel.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setText("REPTASKS");
-
-        myTasksButton.setText("Minhas Tarefas");
 
         myProfileButton.setText("Meu Perfil");
         myProfileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -435,9 +432,6 @@ public class RepublicView extends javax.swing.JFrame {
         scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scoreLabel.setText("Score: x.xx");
 
-        tasksDoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tasksDoneLabel.setText("Tarefas: [x / x]");
-
         republicButton.setText("República");
         republicButton.setEnabled(false);
         republicButton.addActionListener(new java.awt.event.ActionListener() {
@@ -455,11 +449,9 @@ public class RepublicView extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(isLoggedInLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(myTasksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(myProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tasksDoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(republicButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -472,14 +464,10 @@ public class RepublicView extends javax.swing.JFrame {
                 .addComponent(isLoggedInLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scoreLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tasksDoneLabel)
-                .addGap(24, 24, 24)
+                .addGap(46, 46, 46)
                 .addComponent(myProfileButton)
                 .addGap(18, 18, 18)
                 .addComponent(republicButton)
-                .addGap(18, 18, 18)
-                .addComponent(myTasksButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addContainerGap())
@@ -569,12 +557,8 @@ public class RepublicView extends javax.swing.JFrame {
     }//GEN-LAST:event_editTaskButtonActionPerformed
 
     private void myProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myProfileButtonActionPerformed
-        
+        this.republicController.openProfile();
     }//GEN-LAST:event_myProfileButtonActionPerformed
-
-    private void updateRepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRepButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateRepButtonActionPerformed
 
     private void deleteTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTaskButtonActionPerformed
         try {
@@ -608,10 +592,39 @@ public class RepublicView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_removeUserButtonActionPerformed
 
+    private void outRepublicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outRepublicButtonActionPerformed
+        this.republicController.exitRepublic();
+    }//GEN-LAST:event_outRepublicButtonActionPerformed
+
+    private void searchTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTaskButtonActionPerformed
+        String filter = this.searchTaskField.getText().trim();
+        TableRowSorter<TableModel> row = new TableRowSorter<TableModel>(this.tasksTable.getModel());
+
+        if (filter.length() == 0 || filter.isEmpty() || filter.equals("Filtro de busca")) {
+            row.setRowFilter(null);
+            this.tasksTable.setRowSorter(row);
+        } else {
+            this.tasksTable.setRowSorter(row);
+            row.setRowFilter(RowFilter.regexFilter("(?i)" + filter));
+        }
+    }//GEN-LAST:event_searchTaskButtonActionPerformed
+
+    private void searchUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserButtonActionPerformed
+        String filter = this.searchUserField.getText().trim();
+        TableRowSorter<TableModel> row = new TableRowSorter<TableModel>(this.usersTable.getModel());
+
+        if (filter.length() == 0 || filter.isEmpty() || filter.equals("Filtro de busca")) {
+            row.setRowFilter(null);
+            this.usersTable.setRowSorter(row);
+        } else {
+            this.usersTable.setRowSorter(row);
+            row.setRowFilter(RowFilter.regexFilter("(?i)" + filter));
+        }
+    }//GEN-LAST:event_searchUserButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTaskButton;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton deleteRepButton;
     private javax.swing.JButton deleteTaskButton;
     private javax.swing.JButton editTaskButton;
     private javax.swing.JLabel isLoggedInLabel;
@@ -619,7 +632,6 @@ public class RepublicView extends javax.swing.JFrame {
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton myProfileButton;
-    private javax.swing.JButton myTasksButton;
     private javax.swing.JButton openTaskButton;
     private javax.swing.JButton openUserButton;
     private javax.swing.JButton outRepublicButton;
@@ -632,10 +644,8 @@ public class RepublicView extends javax.swing.JFrame {
     private javax.swing.JTextField searchTaskField;
     private javax.swing.JButton searchUserButton;
     private javax.swing.JTextField searchUserField;
-    private javax.swing.JLabel tasksDoneLabel;
     private javax.swing.JPanel tasksPanel;
     private javax.swing.JTable tasksTable;
-    private javax.swing.JButton updateRepButton;
     private javax.swing.JPanel usersPanel;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
